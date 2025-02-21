@@ -4,7 +4,7 @@ body {
     background-color: #f8f9fa;
 }
 
-/* Sidebar */
+
 .sidebar {
     background-color: #000;
     color: #fff;
@@ -27,7 +27,7 @@ body {
 
 .sidebar a:hover,
 .sidebar a.active {
-    background-color: #ffcc00 !important; /* Changed from blue to yellow */
+    background-color: #ffcc00 !important; 
     color: #000 !important;
     font-weight: bold;
 }
@@ -57,18 +57,18 @@ body {
     background-color: #ffcc00;
     color: #000;
     border: none;
-    font-size: 14px; /* Reduced button size */
-    padding: 5px 12px; /* Adjusted padding */
+    font-size: 14px; 
+    padding: 5px 12px; 
 }
 
 .btn-dark {
     background-color: #000;
     color: #fff;
-    font-size: 14px; /* Reduced button size */
-    padding: 5px 12px; /* Adjusted padding */
+    font-size: 14px; 
+    padding: 5px 12px; 
 }
 
-/* Responsive Fixes */
+
 @media (max-width: 768px) {
     .sidebar {
         width: 100%;
