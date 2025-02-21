@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickRecharge</title>
+    <link rel="stylesheet" href="homepage.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <!-- <div  class="logo">QuickRecharge</div> -->
+            <a href="homepage.html" class="logo">QuickRecharge</a>
+
+            <ul class="nav-links">
+                <li><a href="planspage.html">Plans</a></li>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="loginpage.html" class="login-btn">Login</a></li>
+            </ul>
+            <div class="menu-icon">&#9776;</div>
+        </nav>
+    </header>
+
+    <!-- hero section -->
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Instant Mobile Recharge</h1>
+            <p>Quick, secure, and hassle-free mobile recharge service available 24/7</p>
+            <div class="recharge-box">
+                <input type="text" id="mobile-number" placeholder="Enter Mobile Number" maxlength="10">
+                <button onclick="validateAndRedirect()">Proceed to Recharge</button>
+            </div>
+            <p class="error-message" id="error-msg">Please enter a valid 10-digit mobile number.</p>
+        </div>
+    </section>
+    
+    <section class="features">
+        <h2>Our Features</h2>
+        <div class="feature-container">
+            <div class="feature">
+                <img src="/images/mobile-payment.png" alt="Fast Recharge">
+                <h3>Fast Recharge</h3>
+                <p>Instant recharge processing within seconds.</p>
+            </div>
+            <div class="feature">
+                <img src="/images/payroll.png" alt="Multiple Payments">
+                <h3>Multiple Payments</h3>
+                <p>All payment methods accepted.</p>
+            </div>
+            <div class="feature">
+                <img src="/images/credit-card.png" alt="Secure Transactions">
+                <h3>Secure Transactions</h3>
+                <p>100% safe and encrypted payments.</p>
+            </div>
+            <div class="feature">
+                <img src="/images/customer-service.png" alt="24/7 Support">
+                <h3>24/7 Support</h3>
+                <p>Always here to help you.</p>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- why choose us -->
+
+    <section class="why-choose-us">
+        <h2>Why Choose Us</h2>
+        <div class="choose-container">
+            <div class="choose-box">
+                <img src="icons/best-offers.png" alt="Best Offers">
+                <h3>Best Offers</h3>
+                <p>Get amazing discounts on every recharge.</p>
+            </div>
+            <div class="choose-box">
+                <img src="icons/cashback.png" alt="Instant Cashback">
+                <h3>Instant Cashback</h3>
+                <p>Earn rewards on every transaction.</p>
+            </div>
+            <div class="choose-box">
+                <img src="icons/secure-payments.png" alt="Secure Payments">
+                <h3>Secure Payments</h3>
+                <p>Your security is our priority.</p>
+            </div>
+        </div>
+    </section>
+    
+<!-- footer -->
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h3>QuickRecharge</h3>
+            <p>The fastest way to recharge your mobile instantly.</p>
+        </div>
+        
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-contact">
+            <h3>Contact</h3>
+            <p>Email: support@quickrecharge.com</p>
+            <p>Phone: +1 800-123-4567</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 QuickRecharge. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    function validateAndRedirect() {
+        var mobileInput = document.getElementById("mobile-number").value;
+        var errorMsg = document.getElementById("error-msg");
+        var mobilePattern = /^[6-9]\d{9}$/; // Ensures the number starts with 6-9 and is 10 digits long
+        
+        if (!mobilePattern.test(mobileInput)) {
+            errorMsg.style.display = "block"; // Show error message
+            return;
+        }
+
+        errorMsg.style.display = "none"; // Hide error message if valid
+        window.location.href = "planspage.html"; // Redirect to plans page
+    }
+</script>
+
+</body>
+</html>

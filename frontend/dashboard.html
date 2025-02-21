@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SpectrumLink</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="d-flex flex-column flex-shrink-0 p-3 sidebar" id="sidebar">
+    <h5 class="mb-4">📱 SpectrumLink</h5>
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a href="#" class="nav-link active" onclick="setActive(this)">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link" onclick="setActive(this)">Saved Plans</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link" onclick="setActive(this)">Recharge History</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link" onclick="setActive(this)">Payment Methods</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link" onclick="setActive(this)">Support</a>
+        </li>
+    </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <nav class="navbar navbar-light bg-white px-4">
+        <div class="container-fluid">
+            <span class="navbar-brand">Welcome Back</span>
+            <div>
+                <span class="me-3">🔔</span>
+                <span>👤</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="card p-3">
+            <div class="d-flex align-items-center">
+                <img src="user.png" alt="User" class="rounded-circle me-3" width="50">
+                <div>
+                    <h5>Vinayak Mahadev</h5>
+                    <p class="text-muted">+91-9884568863</p>
+                    <span class="badge bg-secondary">Active Plan</span> Valid till Mar 15, 2025
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Plan -->
+        <div class="card p-3 mt-3">
+            <h6>Unlimited Plus</h6>
+            <p>₹599 / 84 days</p>
+            <ul>
+                <li>📶 2GB/day High-Speed Data</li>
+                <li>📞 Unlimited Calls</li>
+                <li>📺 Free Netflix Basic</li>
+            </ul>
+            <button class="btn btn-yellow">Renew Plan</button>
+            <button class="btn btn-dark">Change Plan</button>
+        </div>
+
+        <!-- Saved Plans -->
+        <h6 class="mt-4">Saved Plans</h6>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h6>Basic</h6>
+                    <p>₹299 / 28 days</p>
+                    <button class="btn btn-light">Set as Preferred</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h6>Standard</h6>
+                    <p>₹499 / 56 days</p>
+                    <button class="btn btn-light">Set as Preferred</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h6>Premium</h6>
+                    <p>₹799 / 84 days</p>
+                    <button class="btn btn-light">Set as Preferred</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <h6 class="mt-4">Recent Transactions</h6>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Plan</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mar 15, 2025</td>
+                    <td>Unlimited Plus</td>
+                    <td>₹599</td>
+                    <td><span class="badge bg-success">Success</span></td>
+                </tr>
+                <tr>
+                    <td>Feb 15, 2025</td>
+                    <td>Standard</td>
+                    <td>₹499</td>
+                    <td><span class="badge bg-success">Success</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+function setActive(element) {
+    document.querySelectorAll(".sidebar .nav-link").forEach(link => link.classList.remove("active"));
+    element.classList.add("active");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification | QuickRecharge</title>
+    <link rel="stylesheet" href="otppage.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">QuickRecharge</div>
+        </nav>
+    </header>
+
+    <!-- OTP Section -->
+    <section class="otp-section">
+        <div class="otp-box">
+            <h2>OTP Verification</h2>
+            <p>Enter the OTP sent to your mobile number</p>
+
+            <!-- OTP Input Fields -->
+            <form id="otp-form">
+                <div class="otp-input-container">
+                    <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 0)">
+                    <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 1)">
+                    <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 2)">
+                    <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 3)">
+                </div>
+
+                <p id="otp-error-message" class="error-message"></p>
+                
+                <button type="submit">Verify OTP</button>
+            </form>
+
+            <!-- Resend OTP -->
+            <p class="resend-text">Didn’t receive the OTP? <span id="resend-otp">Resend OTP</span></p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const otpForm = document.getElementById("otp-form");
+
+    otpForm.addEventListener("submit", function (event) {
+        event.preventDefault(); 
+        window.location.href = "dashboard.html";
+    });
+});
+
+    </script>
+
+</body>
+</html>

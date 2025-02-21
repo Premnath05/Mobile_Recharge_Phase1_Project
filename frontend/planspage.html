@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RechargeHub - Find the Perfect Plan</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="planspage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <!-- <div class="logo">QuickRecharge</div> -->
+            <a href="homepage.html" class="logo">QuickRecharge</a>
+
+            <ul class="nav-links">
+                <li><a href="planspage.html">Plans</a></li>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="loginpage.html" class="login-btn">Login</a></li>
+            </ul>
+            <div class="menu-icon">&#9776;</div>
+        </nav>
+    </header>
+
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Find the Perfect Plan</h2>
+            <p>Explore our wide range of prepaid plans tailored for your needs.</p>
+        </div>
+        <div class="hero-image">
+            <!-- <img src="/images/planbanner.png" alt="plan banner"> -->
+
+            <p>Mobile Recharge Illustration</p>
+        </div>
+    </section>
+
+    <!-- Plan Filters -->
+
+    <section class="plan-filters">
+        <button class="filter-btn active" onclick="filterPlans('all')">All Plans</button>
+        <button class="filter-btn" onclick="filterPlans('popular')">Popular Plans</button>
+        <button class="filter-btn" onclick="filterPlans('validity')">Validity Plans</button>
+        <button class="filter-btn" onclick="filterPlans('data')">Data Plans</button>
+        <button class="filter-btn" onclick="filterPlans('unlimited')">Unlimited Data Plans</button>
+        <button class="filter-btn" onclick="filterPlans('fiveg')">5G Plans</button>
+        <button class="filter-btn" onclick="filterPlans('talktime')">Talk Time Plans</button>
+        <button class="filter-btn" onclick="filterPlans('annual')">Annual Plans</button>
+        <button class="filter-btn" onclick="filterPlans('international')">International Plans</button>
+    </section>
+
+    <!-- Plans Section -->
+
+    <section class="plans">
+        <!-- Popular Plans -->
+        <div class="plan-card popular">
+            <h3>₹299</h3>
+            <p>2GB/day</p>
+            <p>28 Days Validity</p>
+            <p>Unlimited Calls</p>
+            <span class="badge">Popular</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(299, '2GB/day', '28 Days', 'Unlimited Calls')">Buy Now</button>
+
+        </div>
+        <div class="plan-card popular">
+            <h3>₹399</h3>
+            <p>3GB/day</p>
+            <p>30 Days Validity</p>
+            <p>Unlimited Calls</p>
+            <span class="badge">Popular</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(399, '3GB/day', '30 Days', 'Unlimited Calls')">Buy Now</button>
+
+            
+        </div>
+
+         <!-- Validity Plans -->
+         <div class="plan-card validity">
+            <h3>₹99</h3>
+            <p>200MB Data</p>
+            <p>28 Days Validity</p>
+            <p>No Calls</p>
+            <span class="badge">Validity</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(99, '200MB/day', '28 Days', 'No Calls')">Buy Now</button>
+
+            
+        </div>
+
+        <!-- Data Plans -->
+        <div class="plan-card data">
+            <h3>₹49</h3>
+            <p>1GB Data</p>
+            <p>1 Day Validity</p>
+            <p>No Calls</p>
+            <span class="badge">Data</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(49, '1GB/day', '1 Day', 'No Calls')">Buy Now</button>
+
+        </div>
+
+        <!-- Unlimited Data Plans -->
+        <div class="plan-card unlimited">
+            <h3>₹999</h3>
+            <p>Unlimited Data</p>
+            <p>28 Days Validity</p>
+            <p>Unlimited Calls</p>
+            <span class="badge">Unlimited</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(999, 'Unlimited Data', '28 Days', 'Unlimited Calls')">Buy Now</button>
+
+        </div>
+
+
+        <!-- 5G Plans -->
+        <div class="plan-card fiveg">
+            <h3>₹499</h3>
+            <p>3GB/day</p>
+            <p>56 Days Validity</p>
+            <p>Unlimited Calls</p>
+            <span class="badge">5G</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(499, '3GB/day', '56 Days', 'Unlimited Calls')">Buy Now</button>
+
+        </div>
+        <div class="plan-card fiveg">
+            <h3>₹799</h3>
+            <p>4GB/day</p>
+            <p>60 Days Validity</p>
+            <p>Unlimited Calls</p>
+            <span class="badge">5G</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+             <button class="buy-btn" onclick="redirectToPayment(799, '4GB/day', '60 Days', 'Unlimited Calls')">Buy Now</button>
+
+        </div>
+
+        <!-- Talk Time Plans -->
+        <div class="plan-card talktime">
+            <h3>₹100</h3>
+            <p>Talk Time ₹81.75</p>
+            <p>No Validity</p>
+            <p>No Data</p>
+            <span class="badge">Talk Time</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(100, 'Talk Time ₹81.75', 'No Validity' ,'No Data')">Buy Now</button>
+
+        </div>
+        <div class="plan-card talktime">
+            <h3>₹500</h3>
+            <p>Talk Time ₹423</p>
+            <p>Unlimited Validity</p>
+            <p>No Data</p>
+            <span class="badge">Talk Time</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(500, 'Talk Time ₹425', 'Unlimited Validity' ,'No Data')">Buy Now</button>
+
+        </div>
+
+        <!-- Annual Plans -->
+        <div class="plan-card annual">
+            <h3>₹999</h3>
+            <p>2.5GB/day</p>
+            <p>365 Days Validity</p>
+            <p>Unlimited Calls</p>
+            <span class="badge">Annual</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(999, '2.5GB/day', '365 Days', 'Unlimited Calls')">Buy Now</button>
+
+        </div>
+        <div class="plan-card annual">
+            <h3>₹1499</h3>
+            <p>3GB/day</p>
+            <p>365 Days Validity</p>
+            <p>Unlimited Calls</p>
+            <span class="badge">Annual</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(1499, '3GB/day', '365 Days', 'Unlimited Calls')">Buy Now</button>
+
+        </div>
+
+        <!-- International Plans -->
+        <div class="plan-card international">
+            <h3>₹1999</h3>
+            <p>500 Min International Calls</p>
+            <p>10GB Data</p>
+            <p>30 Days Validity</p>
+            <span class="badge">International</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(1999, '10GB Data', '30 Days', '500 Min International Calls')">Buy Now</button>
+
+             
+        </div>
+        <div class="plan-card international">
+            <h3>₹2999</h3>
+            <p>1000 Min International Calls</p>
+            <p>20GB Data</p>
+            <p>60 Days Validity</p>
+            <span class="badge">International</span>
+            <!-- <button class="buy-btn">Buy Now</button> -->
+            <button class="buy-btn" onclick="redirectToPayment(2999, '20GB Data', '60 Days', '1000 Min International Calls')">Buy Now</button>
+
+        </div>
+    </section>
+
+
+    
+<div class="modal fade" id="planModal" tabindex="-1" aria-labelledby="planModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title fw-bold text-dark" id="planModalLabel">Plan Summary</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-white text-dark">  <!-- Ensures readable text -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6 fw-bold">Plan Price:</div>
+                        <div class="col-6 text-end fw-bold text-primary" id="modal-price">-</div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6 fw-bold">Data:</div>
+                        <div class="col-6 text-end text-dark" id="modal-data">-</div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6 fw-bold">Validity:</div>
+                        <div class="col-6 text-end text-dark" id="modal-validity">-</div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6 fw-bold">Calls:</div>
+                        <div class="col-6 text-end text-dark" id="modal-calls">-</div>
+                    </div>
+                    <hr>
+                    <div class="row mt-3">
+                        <div class="col-6 fw-bold"><strong>Payable Amount:</strong></div>
+                        <div class="col-6 text-end fw-bold text-success" id="modal-total">-</div>
+                    </div>
+                </div>
+            </div>
+      
+            <div class="modal-footer bg-light d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-secondary px-3" data-bs-dismiss="modal">Cancel</button>
+                <a id="payButton" class="btn btn-warning px-3 d-none">Proceed to Pay</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2025 RechargeHub. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+   function redirectToPayment(price, data, validity, calls) {
+    // Ensure no undefined values are passed
+    if (!price || !data || !validity || !calls) {
+        console.error("Missing plan details.");
+        return;
+    }
+
+    // Update modal content
+    document.getElementById("modal-price").textContent = price;
+    document.getElementById("modal-data").textContent = data;
+    document.getElementById("modal-validity").textContent = validity;
+    document.getElementById("modal-calls").textContent = calls;
+    document.getElementById("modal-total").textContent = price; // Payable amount is just the plan price
+
+    // Set Pay button URL and make it visible
+    let payUrl = `paymentpage.html?price=${encodeURIComponent(price)}&data=${encodeURIComponent(data)}&validity=${encodeURIComponent(validity)}&calls=${encodeURIComponent(calls)}`;
+    let payButton = document.getElementById("payButton");
+    payButton.setAttribute("href", payUrl);
+    payButton.classList.remove("d-none"); // Show Pay button
+
+    // Show modal
+    let planModal = new bootstrap.Modal(document.getElementById("planModal"));
+    planModal.show();
+}
+
+
+    </script>
+
+
+
+
+</body>
+</html>

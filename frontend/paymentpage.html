@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 1100px;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .payment-summary {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn-yellow {
+            background: #ffc107;
+            color: black;
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <nav class="navbar navbar-dark bg-black p-3">
+        <a class="navbar-brand text-white ms-3" href="#">QuickRecharge</a>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Left Section: Plan Summary & Payment Methods -->
+            <div class="col-lg-7">
+                <!-- <div class="box mb-3">
+                    <h5>Plan Summary</h5>
+                    <p><strong>5G Premium Plan</strong> <span class="float-end">₹299</span></p>
+                    <p>2GB/day + Unlimited Calls</p>
+                    <hr>
+                    <p>Validity <span class="float-end">28 Days</span></p>
+                    <p>GST (18%) <span class="float-end">₹53.82</span></p>
+                    <hr>
+                    <p><strong>Total Amount</strong> <span class="float-end">₹352.82</span></p>
+                </div> -->
+
+
+
+
+                <div class="box mb-3">
+                    <h5>Plan Summary</h5>
+                    <p id="plan-name"><strong>Loading...</strong></p>
+                    <p>Price <span class="float-end" id="plan-price">₹0</span></p>
+                    <p>Validity <span class="float-end" id="plan-validity">Loading...</span></p>
+                    <p>GST (18%) <span class="float-end" id="plan-gst">₹0</span></p>
+                    <hr>
+                    <p><strong>Total Amount</strong> <span class="float-end" id="plan-total">₹0</span></p>
+                </div>
+                
+                <!-- Update Pay Button -->
+                <button class="btn btn-dark w-100 mt-3" id="payButton" disabled>Pay ₹0</button>
+                
+
+
+
+                <!-- Payment Method -->
+                <div class="box">
+                    <h5>Select Payment Method</h5>
+
+                    <!-- UPI Payment -->
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="paymentMethod" id="upiOption" onclick="showSection('upiSection')">
+                        <label for="upiOption">UPI Payment</label>
+                    </div>
+                    <div id="upiSection" class="mt-3 hidden">
+                        <div class="d-flex justify-content-between gap-2">
+                            <button class="btn btn-outline-dark flex-fill p-2" onclick="selectUPI()">Google Pay</button>
+                            <button class="btn btn-outline-dark flex-fill p-2" onclick="selectUPI()">PhonePe</button>
+                            <button class="btn btn-outline-dark flex-fill p-2" onclick="selectUPI()">Paytm</button>
+                        </div>
+                        <div id="upiInputSection" class="mt-3 hidden">
+                            <label for="upiID">Enter UPI ID:</label>
+                            <input type="text" id="upiID" class="form-control" placeholder="example@upi" oninput="validateUPI()">
+                        </div>
+                    </div>
+
+                    <!-- Credit/Debit Card -->
+                    <div class="form-check mt-3">
+                        <input type="radio" class="form-check-input" name="paymentMethod" id="cardOption" onclick="showSection('cardSection')">
+                        <label for="cardOption">Credit/Debit Card</label>
+                    </div>
+                    <div id="cardSection" class="mt-3 hidden">
+                        <label for="cardNumber">Card Number:</label>
+                        <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456">
+                        <div class="row mt-2">
+                            <div class="col">
+                                <label for="expiry">Expiry Date:</label>
+                                <input type="text" id="expiry" class="form-control" placeholder="MM/YY">
+                            </div>
+                            <div class="col">
+                                <label for="cvv">CVV:</label>
+                                <input type="text" id="cvv" class="form-control" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Net Banking -->
+                    <div class="form-check mt-3">
+                        <input type="radio" class="form-check-input" name="paymentMethod" id="netBankingOption" onclick="showSection('netBankingSection')">
+                        <label for="netBankingOption">Net Banking</label>
+                    </div>
+                    <div id="netBankingSection" class="mt-3 hidden">
+                        <label for="bankSelect">Select Bank:</label>
+                        <select id="bankSelect" class="form-control">
+                            <option value="">Choose Bank</option>
+                            <option value="SBI">State Bank of India</option>
+                            <option value="HDFC">HDFC Bank</option>
+                            <option value="ICICI">ICICI Bank</option>
+                            <option value="Axis">Axis Bank</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Section: Payment Summary -->
+            <div class="col-lg-5">
+                <div class="payment-summary">
+                    <h5>Payment Summary</h5>
+                    <p>Subtotal <span class="float-end">₹299.00</span></p>
+                    <p>GST (18%) <span class="float-end">₹53.82</span></p>
+                    <hr>
+                    <p><strong>Total</strong> <span class="float-end">₹352.82</span></p>
+                    <button class="btn btn-dark w-100 mt-3" id="payButton" disabled>Pay ₹352.82</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function showSection(sectionID) {
+        // Hide all sections
+        document.getElementById("upiSection").classList.add("hidden");
+        document.getElementById("cardSection").classList.add("hidden");
+        document.getElementById("netBankingSection").classList.add("hidden");
+        document.getElementById("upiInputSection").classList.add("hidden");
+
+        // Show selected section
+        document.getElementById(sectionID).classList.remove("hidden");
+    }
+
+    function selectUPI() {
+        document.getElementById("upiInputSection").classList.remove("hidden");
+    }
+
+    function validateUPI() {
+        let upiID = document.getElementById("upiID").value;
+        document.getElementById("payButton").disabled = upiID.length === 0;
+    }
+
+
+
+    
+    // Retrieve plan details from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const price = urlParams.get("price") || "299";
+    const data = urlParams.get("data") || "2GB/day";
+    const validity = urlParams.get("validity") || "28 Days";
+    const calls = urlParams.get("calls") || "Unlimited Calls";
+
+    // Calculate GST and total price
+    const gstAmount = (price * 0.18).toFixed(2);
+    const totalAmount = (parseFloat(price) + parseFloat(gstAmount)).toFixed(2);
+
+    // Update payment page content dynamically
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("plan-name").innerText = `${data} + ${calls}`;
+        document.getElementById("plan-price").innerText = `₹${price}`;
+        document.getElementById("plan-validity").innerText = validity;
+        document.getElementById("plan-gst").innerText = `₹${gstAmount}`;
+        document.getElementById("plan-total").innerText = `₹${totalAmount}`;
+        document.getElementById("payButton").innerText = `Pay ₹${totalAmount}`;
+    });
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
