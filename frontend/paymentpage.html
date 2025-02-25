@@ -3,204 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Payment Page</title>
+    <title>Payment Page - SpectrumLink</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            max-width: 1100px;
-        }
-        .box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        .payment-summary {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        .btn-yellow {
-            background: #ffc107;
-            color: black;
-            font-weight: bold;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="paymentpage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 
-    <!-- Header -->
-    <nav class="navbar navbar-dark bg-black p-3">
-        <a class="navbar-brand text-white ms-3" href="#">QuickRecharge</a>
-    </nav>
-
-    <div class="container mt-4">
-        <div class="row">
-            <!-- Left Section: Plan Summary & Payment Methods -->
-            <div class="col-lg-7">
-                <!-- <div class="box mb-3">
-                    <h5>Plan Summary</h5>
-                    <p><strong>5G Premium Plan</strong> <span class="float-end">₹299</span></p>
-                    <p>2GB/day + Unlimited Calls</p>
-                    <hr>
-                    <p>Validity <span class="float-end">28 Days</span></p>
-                    <p>GST (18%) <span class="float-end">₹53.82</span></p>
-                    <hr>
-                    <p><strong>Total Amount</strong> <span class="float-end">₹352.82</span></p>
-                </div> -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
 
 
-
-
-                <div class="box mb-3">
-                    <h5>Plan Summary</h5>
-                    <p id="plan-name"><strong>Loading...</strong></p>
-                    <p>Price <span class="float-end" id="plan-price">₹0</span></p>
-                    <p>Validity <span class="float-end" id="plan-validity">Loading...</span></p>
-                    <p>GST (18%) <span class="float-end" id="plan-gst">₹0</span></p>
-                    <hr>
-                    <p><strong>Total Amount</strong> <span class="float-end" id="plan-total">₹0</span></p>
-                </div>
-                
-                <!-- Update Pay Button -->
-                <button class="btn btn-dark w-100 mt-3" id="payButton" disabled>Pay ₹0</button>
-                
-
-
-
-                <!-- Payment Method -->
-                <div class="box">
-                    <h5>Select Payment Method</h5>
-
-                    <!-- UPI Payment -->
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" name="paymentMethod" id="upiOption" onclick="showSection('upiSection')">
-                        <label for="upiOption">UPI Payment</label>
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="success-checkmark">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>Payment Successful!</h4>
+                        <p>Your recharge has been processed successfully.</p>
+                        <button class="btn btn-yellow mt-3" onclick="window.location.href='homepage.html'">
+                            Back to Home
+                        </button>
                     </div>
-                    <div id="upiSection" class="mt-3 hidden">
-                        <div class="d-flex justify-content-between gap-2">
-                            <button class="btn btn-outline-dark flex-fill p-2" onclick="selectUPI()">Google Pay</button>
-                            <button class="btn btn-outline-dark flex-fill p-2" onclick="selectUPI()">PhonePe</button>
-                            <button class="btn btn-outline-dark flex-fill p-2" onclick="selectUPI()">Paytm</button>
-                        </div>
-                        <div id="upiInputSection" class="mt-3 hidden">
-                            <label for="upiID">Enter UPI ID:</label>
-                            <input type="text" id="upiID" class="form-control" placeholder="example@upi" oninput="validateUPI()">
-                        </div>
-                    </div>
-
-                    <!-- Credit/Debit Card -->
-                    <div class="form-check mt-3">
-                        <input type="radio" class="form-check-input" name="paymentMethod" id="cardOption" onclick="showSection('cardSection')">
-                        <label for="cardOption">Credit/Debit Card</label>
-                    </div>
-                    <div id="cardSection" class="mt-3 hidden">
-                        <label for="cardNumber">Card Number:</label>
-                        <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456">
-                        <div class="row mt-2">
-                            <div class="col">
-                                <label for="expiry">Expiry Date:</label>
-                                <input type="text" id="expiry" class="form-control" placeholder="MM/YY">
-                            </div>
-                            <div class="col">
-                                <label for="cvv">CVV:</label>
-                                <input type="text" id="cvv" class="form-control" placeholder="123">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Net Banking -->
-                    <div class="form-check mt-3">
-                        <input type="radio" class="form-check-input" name="paymentMethod" id="netBankingOption" onclick="showSection('netBankingSection')">
-                        <label for="netBankingOption">Net Banking</label>
-                    </div>
-                    <div id="netBankingSection" class="mt-3 hidden">
-                        <label for="bankSelect">Select Bank:</label>
-                        <select id="bankSelect" class="form-control">
-                            <option value="">Choose Bank</option>
-                            <option value="SBI">State Bank of India</option>
-                            <option value="HDFC">HDFC Bank</option>
-                            <option value="ICICI">ICICI Bank</option>
-                            <option value="Axis">Axis Bank</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Section: Payment Summary -->
-            <div class="col-lg-5">
-                <div class="payment-summary">
-                    <h5>Payment Summary</h5>
-                    <p>Subtotal <span class="float-end">₹299.00</span></p>
-                    <p>GST (18%) <span class="float-end">₹53.82</span></p>
-                    <hr>
-                    <p><strong>Total</strong> <span class="float-end">₹352.82</span></p>
-                    <button class="btn btn-dark w-100 mt-3" id="payButton" disabled>Pay ₹352.82</button>
                 </div>
             </div>
         </div>
     </div>
 
-<script>
-    function showSection(sectionID) {
-        // Hide all sections
-        document.getElementById("upiSection").classList.add("hidden");
-        document.getElementById("cardSection").classList.add("hidden");
-        document.getElementById("netBankingSection").classList.add("hidden");
-        document.getElementById("upiInputSection").classList.add("hidden");
 
-        // Show selected section
-        document.getElementById(sectionID).classList.remove("hidden");
-    }
+    <nav class="navbar navbar-dark bg-black">
+        <div class="container">
+            <a class="navbar-brand" href="homepage.html">SpectrumLink</a>
+        </div>
+    </nav>
 
-    function selectUPI() {
-        document.getElementById("upiInputSection").classList.remove("hidden");
-    }
+    <div class="container mt-4">
+        <div class="row">
 
-    function validateUPI() {
-        let upiID = document.getElementById("upiID").value;
-        document.getElementById("payButton").disabled = upiID.length === 0;
-    }
-
-
-
-    
-    // Retrieve plan details from URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const price = urlParams.get("price") || "299";
-    const data = urlParams.get("data") || "2GB/day";
-    const validity = urlParams.get("validity") || "28 Days";
-    const calls = urlParams.get("calls") || "Unlimited Calls";
-
-    // Calculate GST and total price
-    const gstAmount = (price * 0.18).toFixed(2);
-    const totalAmount = (parseFloat(price) + parseFloat(gstAmount)).toFixed(2);
-
-    // Update payment page content dynamically
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("plan-name").innerText = `${data} + ${calls}`;
-        document.getElementById("plan-price").innerText = `₹${price}`;
-        document.getElementById("plan-validity").innerText = validity;
-        document.getElementById("plan-gst").innerText = `₹${gstAmount}`;
-        document.getElementById("plan-total").innerText = `₹${totalAmount}`;
-        document.getElementById("payButton").innerText = `Pay ₹${totalAmount}`;
-    });
+            <div class="col-lg-8">
+                <div class="payment-box">
+                    <h5 class="mb-4">Plan Details</h5>
+                    <div id="planDetails">
+                        <div class="row mb-2">
+                            <div class="col-6">Plan</div>
+                            <div class="col-6 text-end" id="planName">Loading...</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">Validity</div>
+                            <div class="col-6 text-end" id="planValidity">Loading...</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6"><strong>Amount</strong></div>
+                            <div class="col-6 text-end"><strong id="planAmount">₹0</strong></div>
+                        </div>
+                    </div>
+                </div>
 
 
+                <div class="payment-box">
+                    <h5 class="mb-4">Select Payment Method</h5>
+                    
+                    
+                    <div class="payment-method" onclick="selectPaymentMethod('upi')">
+                        <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/40" alt="UPI" class="me-3">
+                            <div>
+                                <h6 class="mb-0">UPI Payment</h6>
+                                <small class="text-muted">Pay using UPI apps</small>
+                            </div>
+                        </div>
+                        <div id="upiDetails" class="mt-3" style="display: none;">
+                            <input type="text" class="form-control" placeholder="Enter UPI ID" id="upiId">
+                            <div class="error-text" id="upiError">Please enter a valid UPI ID</div>
+                        </div>
+                    </div>
 
+                    
+                    <div class="payment-method" onclick="selectPaymentMethod('card')">
+                        <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/40" alt="Cards" class="me-3">
+                            <div>
+                                <h6 class="mb-0">Credit / Debit Card</h6>
+                                <small class="text-muted">All major cards accepted</small>
+                            </div>
+                        </div>
+                        <div id="cardDetails" class="mt-3" style="display: none;">
+                            <input type="text" class="form-control mb-2" placeholder="Card Number" id="cardNumber" maxlength="16">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" placeholder="MM/YY" id="cardExpiry" maxlength="5">
+                                </div>
+                                <div class="col-6">
+                                    <input type="password" class="form-control" placeholder="CVV" id="cardCvv" maxlength="3">
+                                </div>
+                            </div>
+                            <div class="error-text" id="cardError">Please enter valid card details</div>
+                        </div>
+                    </div>
 
+                    
+                    <div class="payment-method" onclick="selectPaymentMethod('netbanking')">
+                        <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/40" alt="Net Banking" class="me-3">
+                            <div>
+                                <h6 class="mb-0">Net Banking</h6>
+                                <small class="text-muted">All major banks available</small>
+                            </div>
+                        </div>
+                        <div id="netbankingDetails" class="mt-3" style="display: none;">
+                            <select class="form-control" id="bankSelect">
+                                <option value="">Select Bank</option>
+                                <option value="sbi">State Bank of India</option>
+                                <option value="hdfc">HDFC Bank</option>
+                                <option value="icici">ICICI Bank</option>
+                                <option value="axis">Axis Bank</option>
+                            </select>
+                            <div class="error-text" id="bankError">Please select a bank</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            
+            <div class="col-lg-4">
+                <div class="payment-box">
+                    <h5 class="mb-4">Payment Summary</h5>
+                    <div class="row mb-2">
+                        <div class="col-6">Plan Amount</div>
+                        <div class="col-6 text-end" id="summaryAmount">₹0</div>
+                    </div>
+                    <!-- <div class="row mb-2">
+                        <div class="col-6">GST (18%)</div>
+                        <div class="col-6 text-end" id="summaryGst">₹0</div>
+                    </div> -->
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-6"><strong>Total Amount</strong></div>
+                        <div class="col-6 text-end"><strong id="summaryTotal">₹0</strong></div>
+                    </div>
+                    <button class="btn btn-yellow w-100" onclick="processPayment()" id="payButton" disabled>
+                        Pay Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
+   <script>
+        
+        let selectedMethod = '';
+        let planDetails = {};
 
-</script>
+        
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            planDetails = {
+                price: params.get('price') || '0',
+                data: params.get('data') || '',
+                validity: params.get('validity') || '',
+                calls: params.get('calls') || ''
+            };
 
+            
+            document.getElementById('planName').textContent = `${planDetails.data} + ${planDetails.calls}`;
+            document.getElementById('planValidity').textContent = planDetails.validity;
+            document.getElementById('planAmount').textContent = `₹${planDetails.price}`;
+
+            
+            updatePaymentSummary();
+        };
+
+        
+        function updatePaymentSummary() {
+            const amount = parseFloat(planDetails.price);
+            // const gst = amount * 0.18;
+            // const total = amount + gst;
+
+            document.getElementById('summaryAmount').textContent = `₹${amount.toFixed(2)}`;
+            // document.getElementById('summaryGst').textContent = `₹${gst.toFixed(2)}`;
+            document.getElementById('summaryTotal').textContent = `₹${total.toFixed(2)}`;
+        }
+
+        
+        
+        function selectPaymentMethod(method) {
+            selectedMethod = method;
+            
+            
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.getElementById('upiDetails').style.display = 'none';
+            document.getElementById('cardDetails').style.display = 'none';
+            document.getElementById('netbankingDetails').style.display = 'none';
+
+           
+            const selectedEl = document.querySelector(`.payment-method:nth-child(${
+                method === 'upi' ? '1' : method === 'card' ? '2' : '3'
+            })`);
+            selectedEl.classList.add('selected');
+            document.getElementById(`${method}Details`).style.display = 'block';
+
+            
+            document.getElementById('payButton').disabled = false;
+        }
+
+        
+        function processPayment() {
+            
+            let isValid = true;
+            const errors = document.querySelectorAll('.error-text');
+            errors.forEach(error => error.style.display = 'none');
+
+            if (selectedMethod === 'upi') {
+                const upiId = document.getElementById('upiId').value;
+                if (!upiId.includes('@')) {
+                    document.getElementById('upiError').style.display = 'block';
+                    isValid = false;
+                }
+            } else if (selectedMethod === 'card') {
+                const cardNumber = document.getElementById('cardNumber').value;
+                const expiry = document.getElementById('cardExpiry').value;
+                const cvv = document.getElementById('cardCvv').value;
+
+                if (cardNumber.length !== 16 || expiry.length !== 5 || cvv.length !== 3) {
+                    document.getElementById('cardError').style.display = 'block';
+                    isValid = false;
+                }
+            } else if (selectedMethod === 'netbanking') {
+                const bank = document.getElementById('bankSelect').value;
+                if (!bank) {
+                    document.getElementById('bankError').style.display = 'block';
+                    isValid = false;
+                }
+            }
+
+            if (isValid) {
+               
+                document.getElementById('loadingOverlay').style.display = 'flex';
+                
+                
+                setTimeout(() => {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                    
+                    
+                    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                    document.querySelector('.success-checkmark').style.display = 'block';
+                    successModal.show();
+                }, 2000);
+            }
+        }
+    </script>
 </body>
 </html>
+
+

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MobileCharge Admin Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-black: #000000;
+            --primary-white: #ffffff;
+            --accent-yellow: #ffc107;
+            --gray-light: #f8f9fa;
+            --gray-medium: #6c757d;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--gray-light);
+        }
+
+        /* Sidebar Styles */
+        #sidebar {
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background: var(--primary-black);
+            color: var(--primary-white);
+            transition: 0.3s;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--accent-yellow);
+        }
+
+        .sidebar-menu {
+            padding: 0;
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            padding: 10px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-menu li a {
+            color: var(--primary-white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-menu li a i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .sidebar-menu li:hover, .sidebar-menu li.active {
+            background: var(--accent-yellow);
+        }
+
+        .sidebar-menu li:hover a, .sidebar-menu li.active a {
+            color: var(--primary-black);
+        }
+
+        /* Main Content */
+        #main-content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        /* Cards */
+        .stat-card {
+            background: var(--primary-white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .stat-card h4 {
+            color: var(--primary-black);
+            font-weight: bold;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-yellow);
+        }
+
+        /* Tables */
+        .custom-table {
+            background: var(--primary-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .custom-table th {
+            background: var(--primary-black);
+            color: var(--primary-white);
+        }
+
+        /* Buttons */
+        .btn-custom {
+            background-color: var(--accent-yellow);
+            color: var(--primary-black);
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #e0a800;
+            color: var(--primary-black);
+        }
+
+        /* Charts */
+        .chart-container {
+            background: var(--primary-white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            #sidebar {
+                margin-left: -250px;
+            }
+            
+            #sidebar.active {
+                margin-left: 0;
+            }
+            
+            #main-content {
+                margin-left: 0;
+            }
+            
+            #main-content.active {
+                margin-left: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>SpectrumLink</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="active"><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#users"><i class="fas fa-users"></i> User Management</a></li>
+            <li><a href="#plans"><i class="fas fa-tag"></i> Plan Management</a></li>
+            <li><a href="#transactions"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+            <li><a href="#recharge"><i class="fas fa-mobile-alt"></i> Recharge Requests</a></li>
+            <li><a href="#reports"><i class="fas fa-chart-bar"></i> Reports</a></li>
+            <li><a href="#settings"><i class="fas fa-cog"></i> Admin Settings</a></li>
+            <li><a href="#security"><i class="fas fa-shield-alt"></i> Security Logs</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <button id="sidebarToggle" class="btn btn-custom mb-3">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="content-section active">
+            <h2 class="mb-4">Dashboard Overview</h2>
+            <!-- Stats Cards -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h4>Total Users</h4>
+                        <div class="number">15,489</div>
+                        <div class="trend">+12% this month</div>
+                    </div>
+                </div>
+                <!-- Similar cards for other stats -->
+            </div>
+            <!-- Charts -->
+            <div class="row mt-4">
+                <div class="col-md-8">
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="chart-container">
+                        <canvas id="planDistribution"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Management Section -->
+        <div id="users" class="content-section">
+            <h2 class="mb-4">User Management</h2>
+            <div class="custom-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Plan</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>U001</td>
+                            <td>John Doe</td>
+                            <td>9876543210</td>
+                            <td>Premium</td>
+                            <td><span class="badge bg-success">Active</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-custom">Edit</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <!-- Add more user rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Plan Management Section -->
+        <div id="plans" class="content-section">
+            <h2 class="mb-4">Plan Management</h2>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Basic Plan</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">₹199/month</h6>
+                            <p class="card-text">
+                                - 1.5GB/day<br>
+                                - Unlimited Calls<br>
+                                - 100 SMS/day<br>
+                                - Validity: 28 days
+                            </p>
+                            <button class="btn btn-custom">Edit Plan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more plan cards -->
+            </div>
+        </div>
+
+        <!-- Transactions Section -->
+        <div id="transactions" class="content-section">
+            <h2 class="mb-4">Recent Transactions</h2>
+            <div class="custom-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>User</th>
+                            <th>Plan</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>T001</td>
+                            <td>John Doe</td>
+                            <td>Premium Plan</td>
+                            <td>₹499</td>
+                            <td><span class="badge bg-success">Completed</span></td>
+                            <td>2024-02-23</td>
+                        </tr>
+                        <!-- Add more transaction rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recharge Requests Section -->
+        <div id="recharge" class="content-section">
+            <h2 class="mb-4">Pending Recharge Requests</h2>
+            <div class="custom-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>User</th>
+                            <th>Mobile</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>R001</td>
+                            <td>Jane Smith</td>
+                            <td>9876543211</td>
+                            <td>₹299</td>
+                            <td><span class="badge bg-warning">Pending</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-custom">Approve</button>
+                                <button class="btn btn-sm btn-danger">Reject</button>
+                            </td>
+                        </tr>
+                        <!-- Add more recharge request rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Reports Section -->
+        <div id="reports" class="content-section">
+            <h2 class="mb-4">Analytics Reports</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <canvas id="userGrowthChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <canvas id="revenueByPlanChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Settings Section -->
+        <div id="settings" class="content-section">
+            <h2 class="mb-4">Admin Settings</h2>
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Admin Name</label>
+                            <input type="text" class="form-control" value="Admin User">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" value="admin@mobilecharge.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" value="********">
+                        </div>
+                        <button type="submit" class="btn btn-custom">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Logs Section -->
+        <div id="security" class="content-section">
+            <h2 class="mb-4">Security Logs</h2>
+            <div class="custom-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Action</th>
+                            <th>IP Address</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-02-23 10:30:15</td>
+                            <td>Admin Login</td>
+                            <td>192.168.1.1</td>
+                            <td><span class="badge bg-success">Success</span></td>
+                        </tr>
+                        <!-- Add more security log entries -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+   
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuItems = document.querySelectorAll(".sidebar-menu li a");
+    const contentSections = document.querySelectorAll(".content-section");
+
+    menuItems.forEach(item => {
+        item.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Remove active class from all menu items
+            menuItems.forEach(i => i.parentElement.classList.remove("active"));
+            this.parentElement.classList.add("active");
+
+            // Show corresponding section
+            const targetId = this.getAttribute("href").substring(1);
+            contentSections.forEach(section => {
+                section.classList.remove("active");
+                if (section.id === targetId) {
+                    section.classList.add("active");
+                }
+            });
+        });
+    });
+
+    // Sidebar toggle for mobile
+    document.getElementById("sidebarToggle").addEventListener("click", function () {
+        document.getElementById("sidebar").classList.toggle("active");
+        document.getElementById("main-content").classList.toggle("active");
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Revenue Chart
+    const revenueCtx = document.getElementById("revenueChart").getContext("2d");
+    new Chart(revenueCtx, {
+        type: "line",
+        data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            datasets: [{
+                label: "Revenue (₹)",
+                data: [12000, 15000, 18000, 22000, 25000, 30000],
+                backgroundColor: "rgba(255, 193, 7, 0.2)",
+                borderColor: "#ffc107",
+                borderWidth: 2,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+    // Plan Distribution Pie Chart
+    const planCtx = document.getElementById("planDistribution").getContext("2d");
+    new Chart(planCtx, {
+        type: "doughnut",
+        data: {
+            labels: ["Basic", "Standard", "Premium"],
+            datasets: [{
+                data: [45, 30, 25],
+                backgroundColor: ["#ffc107", "#6c757d", "#000000"],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+});
+
+</script>
+</body>
+</html>

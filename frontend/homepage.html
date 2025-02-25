@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickRecharge</title>
+    <title>SpectrumLink</title>
     <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <!-- <div  class="logo">QuickRecharge</div> -->
-            <a href="homepage.html" class="logo">QuickRecharge</a>
+            <a href="homepage.html" class="logo">SpectrumLink</a>
 
             <ul class="nav-links">
                 <li><a href="planspage.html">Plans</a></li>
@@ -23,12 +23,13 @@
         </nav>
     </header>
 
-    <!-- hero section -->
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Instant Mobile Recharge</h1>
-            <p>Quick, secure, and hassle-free mobile recharge service available 24/7</p>
+           
+             <h1>Connecting You to the Future</h1>
+            <!-- <p>Quick, secure, and hassle-free mobile recharge service available 24/7</p> -->
+             <p>Experience the Full Spectrum of Communication</p>
             <div class="recharge-box">
                 <input type="text" id="mobile-number" placeholder="Enter Mobile Number" maxlength="10">
                 <button onclick="validateAndRedirect()">Proceed to Recharge</button>
@@ -64,8 +65,6 @@
     </section>
     
 
-    <!-- why choose us -->
-
     <section class="why-choose-us">
         <h2>Why Choose Us</h2>
         <div class="choose-container">
@@ -87,12 +86,11 @@
         </div>
     </section>
     
-<!-- footer -->
 
 <footer>
     <div class="footer-container">
         <div class="footer-about">
-            <h3>QuickRecharge</h3>
+            <h3>SpectrumLink</h3>
             <p>The fastest way to recharge your mobile instantly.</p>
         </div>
         
@@ -107,13 +105,13 @@
         
         <div class="footer-contact">
             <h3>Contact</h3>
-            <p>Email: support@quickrecharge.com</p>
+            <p>Email: support@SpectrumLink.com</p>
             <p>Phone: +1 800-123-4567</p>
         </div>
     </div>
 
     <div class="footer-bottom">
-        <p>© 2025 QuickRecharge. All rights reserved.</p>
+        <p>© 2025 SpectrumLink. All rights reserved.</p>
     </div>
 </footer>
 
@@ -121,15 +119,15 @@
     function validateAndRedirect() {
         var mobileInput = document.getElementById("mobile-number").value;
         var errorMsg = document.getElementById("error-msg");
-        var mobilePattern = /^[6-9]\d{9}$/; // Ensures the number starts with 6-9 and is 10 digits long
+        var mobilePattern = /^[6-9]\d{9}$/; 
         
         if (!mobilePattern.test(mobileInput)) {
-            errorMsg.style.display = "block"; // Show error message
+            errorMsg.style.display = "block"; 
             return;
         }
 
-        errorMsg.style.display = "none"; // Hide error message if valid
-        window.location.href = "planspage.html"; // Redirect to plans page
+        errorMsg.style.display = "none"; 
+        window.location.href = "planspage.html";
     }
 </script>
 

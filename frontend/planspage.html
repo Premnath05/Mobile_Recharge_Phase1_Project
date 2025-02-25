@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RechargeHub - Find the Perfect Plan</title>
+    <title>SpectrumLink - Find the Perfect Plan</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="planspage.css">
@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar">
             <!-- <div class="logo">QuickRecharge</div> -->
-            <a href="homepage.html" class="logo">QuickRecharge</a>
+            <a href="homepage.html" class="logo">SpectrumLink</a>
 
             <ul class="nav-links">
                 <li><a href="planspage.html">Plans</a></li>
@@ -28,7 +28,7 @@
     </header>
 
     
-    <!-- Hero Section -->
+
     <section class="hero">
         <div class="hero-content">
             <h2>Find the Perfect Plan</h2>
@@ -41,7 +41,7 @@
         </div>
     </section>
 
-    <!-- Plan Filters -->
+
 
     <section class="plan-filters">
         <button class="filter-btn active" onclick="filterPlans('all')">All Plans</button>
@@ -55,10 +55,10 @@
         <button class="filter-btn" onclick="filterPlans('international')">International Plans</button>
     </section>
 
-    <!-- Plans Section -->
+
 
     <section class="plans">
-        <!-- Popular Plans -->
+
         <div class="plan-card popular">
             <h3>₹299</h3>
             <p>2GB/day</p>
@@ -81,8 +81,8 @@
             
         </div>
 
-         <!-- Validity Plans -->
-         <div class="plan-card validity">
+
+        <div class="plan-card validity">
             <h3>₹99</h3>
             <p>200MB Data</p>
             <p>28 Days Validity</p>
@@ -94,7 +94,7 @@
             
         </div>
 
-        <!-- Data Plans -->
+
         <div class="plan-card data">
             <h3>₹49</h3>
             <p>1GB Data</p>
@@ -106,7 +106,7 @@
 
         </div>
 
-        <!-- Unlimited Data Plans -->
+
         <div class="plan-card unlimited">
             <h3>₹999</h3>
             <p>Unlimited Data</p>
@@ -119,7 +119,7 @@
         </div>
 
 
-        <!-- 5G Plans -->
+
         <div class="plan-card fiveg">
             <h3>₹499</h3>
             <p>3GB/day</p>
@@ -141,7 +141,7 @@
 
         </div>
 
-        <!-- Talk Time Plans -->
+
         <div class="plan-card talktime">
             <h3>₹100</h3>
             <p>Talk Time ₹81.75</p>
@@ -163,7 +163,7 @@
 
         </div>
 
-        <!-- Annual Plans -->
+
         <div class="plan-card annual">
             <h3>₹999</h3>
             <p>2.5GB/day</p>
@@ -185,7 +185,7 @@
 
         </div>
 
-        <!-- International Plans -->
+
         <div class="plan-card international">
             <h3>₹1999</h3>
             <p>500 Min International Calls</p>
@@ -218,7 +218,7 @@
                 <h5 class="modal-title fw-bold text-dark" id="planModalLabel">Plan Summary</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body bg-white text-dark">  <!-- Ensures readable text -->
+            <div class="modal-body bg-white text-dark">  
                 <div class="container">
                     <div class="row">
                         <div class="col-6 fw-bold">Plan Price:</div>
@@ -255,7 +255,7 @@
 
 
 
-    <!-- Footer Section -->
+   
     <footer>
         <p>© 2025 RechargeHub. All rights reserved.</p>
     </footer>
@@ -267,26 +267,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
    function redirectToPayment(price, data, validity, calls) {
-    // Ensure no undefined values are passed
+
+
     if (!price || !data || !validity || !calls) {
         console.error("Missing plan details.");
         return;
     }
 
-    // Update modal content
+
     document.getElementById("modal-price").textContent = price;
     document.getElementById("modal-data").textContent = data;
     document.getElementById("modal-validity").textContent = validity;
     document.getElementById("modal-calls").textContent = calls;
-    document.getElementById("modal-total").textContent = price; // Payable amount is just the plan price
+    document.getElementById("modal-total").textContent = price; 
 
-    // Set Pay button URL and make it visible
+    
     let payUrl = `paymentpage.html?price=${encodeURIComponent(price)}&data=${encodeURIComponent(data)}&validity=${encodeURIComponent(validity)}&calls=${encodeURIComponent(calls)}`;
     let payButton = document.getElementById("payButton");
     payButton.setAttribute("href", payUrl);
-    payButton.classList.remove("d-none"); // Show Pay button
+    payButton.classList.remove("d-none"); 
 
-    // Show modal
+    
     let planModal = new bootstrap.Modal(document.getElementById("planModal"));
     planModal.show();
 }

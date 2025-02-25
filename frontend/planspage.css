@@ -1,4 +1,4 @@
-/* Global Styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -69,9 +69,9 @@ nav ul li a:hover {
 }
 
 .logo {
-    text-decoration: none;  /* Removes underline */
-    color: inherit;         /* Keeps the default text color */
-    font-weight: bold;      /* Ensures it looks like a logo */
+    text-decoration: none; 
+    color: inherit;         
+    font-weight: bold;     
 }
 
 
@@ -101,7 +101,7 @@ nav ul li a:hover {
     color: #ffcc00;
 }
 
-/* Login Button */
+
 .login-btn {
     padding: 8px 15px;
     background-color: #ffcc00;
@@ -113,14 +113,14 @@ nav ul li a:hover {
     background-color: #e6b800;
 }
 
-/* Mobile Navigation */
+
 .menu-icon {
     display: none;
     font-size: 28px;
     cursor: pointer;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -143,7 +143,7 @@ nav ul li a:hover {
     }
 }
 
-/* Hero Section */
+
 .hero {
     text-align: center;
     background: black;
@@ -174,7 +174,7 @@ nav ul li a:hover {
     color: #bbb;
 }
 
-/* Plan Filters */
+
 .plan-filters {
     text-align: center;
     padding: 20px 5%;
@@ -197,7 +197,7 @@ nav ul li a:hover {
     color: black;
 }
 
-/* Plans Section */
+
 .plans {
     display: flex;
     justify-content: center;
@@ -263,7 +263,7 @@ nav ul li a:hover {
     background: #FFC107;
 }
 
-/* Footer */
+
 footer {
     text-align: center;
     padding: 20px;

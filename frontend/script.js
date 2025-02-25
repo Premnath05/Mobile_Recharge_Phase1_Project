@@ -67,6 +67,8 @@ function redirectToPayment(price, data, validity, calls) {
     params.append("calls", calls);
 
     window.location.href = "paymentpage.html?" + params.toString();
+    // window.location.href = "ennakumar.html?" + params.toString();
+
 }
 
 

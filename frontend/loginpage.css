@@ -1,5 +1,5 @@
 
-/* Google Font */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 * {
@@ -13,7 +13,7 @@ body {
     background-color: #f5f5f5;
 }
 
-/* Navbar Styles */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -49,7 +49,7 @@ body {
     color: #ffcc00;
 }
 
-/* Login Button */
+
 .login-btn {
     padding: 8px 15px;
     background-color: #ffcc00;
@@ -61,14 +61,14 @@ body {
     background-color: #e6b800;
 }
 
-/* Mobile Navigation */
+
 .menu-icon {
     display: none;
     font-size: 28px;
     cursor: pointer;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -91,7 +91,7 @@ body {
     }
 }
 
-/* Login Section */
+
 .login-section {
     display: flex;
     justify-content: center;
@@ -150,17 +150,17 @@ button:hover {
     background-color: #e6b800;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .login-box {
         width: 90%;
     }
 }
 
-/* Error Message Styling */
+
 .error-message {
     color: red;
     font-size: 14px;
     margin-top: 5px;
-    display: none; /* Initially hidden */
+    display: none; 
 }
