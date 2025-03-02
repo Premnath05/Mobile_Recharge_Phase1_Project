@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification | SpectrumLink</title>
+    <link rel="stylesheet" href="/recharge_website/css/otppage.css">
+</head>
+<body>
+
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">SpectrumLink</a>
+            <ul class="nav-links">
+                <li><a href="planspage.html">Plans</a></li>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="loginpage.html" class="login-btn">Login</a></li>
+            </ul>
+            <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        </nav>
+    </header>
+
+
+    <section class="otp-section">
+        <div class="otp-box">
+            <h2>OTP Verification</h2>
+            <p>Enter the OTP sent to your mobile number</p>
+
+
+            <form id="otp-form">
+                <div class="otp-input-container">
+                    <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 0)">
+                    <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 1)">
+                    <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 2)">
+                    <input type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 3)">
+                </div>
+
+                <p id="otp-error-message" class="error-message"></p>
+                
+                <button type="submit">Verify OTP</button>
+            </form>
+
+
+            <p class="resend-text">Didn’t receive the OTP? <span id="resend-otp">Resend OTP</span></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 SpectrumLink. All rights reserved.</p>
+    </footer>
+
+    <script src="/recharge_website/js/login.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const otpForm = document.getElementById("otp-form");
+
+    otpForm.addEventListener("submit", function (event) {
+        event.preventDefault(); 
+        window.location.href = "user.html";
+    });
+});
+
+
+
+    </script>
+
+</body>
+</html>
