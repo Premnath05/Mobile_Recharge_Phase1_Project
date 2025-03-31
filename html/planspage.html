@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpectrumLink - Find the Perfect Plan</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/planspage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">SpectrumLink</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="planspage.html">Plans</a></li>
+                <li><a href="contactpage.html">Contact</a></li>
+                <li><a href="loginpage.html" class="login-btn" id="loginProfileBtn">Login</a></li>
+            </ul>
+            <div class="menu-icon">☰</div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2>Find the Perfect Plan</h2>
+            <p>Explore our wide range of prepaid plans tailored for your needs.</p>
+            <p>Recharging for: <strong id="displayMobileNumber">Loading...</strong></p>
+        </div>
+    </section>
+
+    <section class="plan-filters">
+        <button class="filter-btn active" data-category="all" onclick="filterPlans('all')">All Plans</button>
+        <button class="filter-btn" data-category="popular" onclick="filterPlans('popular')">Popular Plans</button>
+        <button class="filter-btn" data-category="data" onclick="filterPlans('data')">Data Plans</button>
+        <button class="filter-btn" data-category="unlimited" onclick="filterPlans('unlimited')">Unlimited Data Plans</button>
+        <button class="filter-btn" data-category="fiveg" onclick="filterPlans('fiveg')">5G Plans</button>
+        <button class="filter-btn" data-category="annual" onclick="filterPlans('annual')">Annual Plans</button>
+    </section>
+
+    <section class="plans" id="plans-container">
+        <!-- Plans will be loaded dynamically here -->
+    </section>
+
+    <div class="modal fade" id="planModal" tabindex="-1" aria-labelledby="planModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title fw-bold text-dark" id="planModalLabel">Plan Summary</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-white text-dark">  
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6 fw-bold">Plan Price:</div>
+                            <div class="col-6 text-end fw-bold text-primary" id="modal-price">-</div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6 fw-bold">Data:</div>
+                            <div class="col-6 text-end text-dark" id="modal-data">-</div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6 fw-bold">Validity:</div>
+                            <div class="col-6 text-end text-dark" id="modal-validity">-</div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6 fw-bold">Calls:</div>
+                            <div class="col-6 text-end text-dark" id="modal-calls">-</div>
+                        </div>
+                        <hr>
+                        <div class="row mt-3">
+                            <div class="col-6 fw-bold"><strong>Payable Amount:</strong></div>
+                            <div class="col-6 text-end fw-bold text-success" id="modal-total">-</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light d-flex justify-content-end gap-2">
+                    <button type="button" class="btn btn-secondary px-3" data-bs-dismiss="modal">Cancel</button>
+                    <a id="payButton" class="btn btn-warning px-3 d-none">Proceed to Pay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Mobile Number Modal -->
+    <div class="modal fade" id="mobileInputModal" tabindex="-1" aria-labelledby="mobileInputModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mobileInputModalLabel">Enter Mobile Number</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="mobileNumberInput">Mobile Number</label>
+                        <input type="tel" class="form-control" id="mobileNumberInput" pattern="[0-9]{10}" maxlength="10" placeholder="Enter 10 digit mobile number" required>
+                        <div class="invalid-feedback">Please enter a valid 10-digit mobile number.</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="validateAndProceed()">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>2025 SpectrumLink. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // API Base URL
+        const API_BASE_URL = 'http://localhost:8083/admin';
+
+        // Authentication helper
+        const getAuthHeaders = () => {
+            const token = localStorage.getItem('token');
+            return token ? {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            } : {
+                'Content-Type': 'application/json'
+            };
+        };
+
+        // Check login status and update UI
+        document.addEventListener('DOMContentLoaded', async function() {
+            const loginProfileBtn = document.getElementById('loginProfileBtn');
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            
+            if (isLoggedIn === 'true') {
+                loginProfileBtn.textContent = 'Profile';
+                loginProfileBtn.href = 'user.html';
+            }
+
+            const mobileNumber = getQueryParam("mobile");
+            const displayMobileNumber = document.getElementById("displayMobileNumber");
+            if (mobileNumber && displayMobileNumber) {
+                displayMobileNumber.textContent = mobileNumber;
+            } else if (displayMobileNumber) {
+                displayMobileNumber.style.display = "none";
+            }
+
+            await fetchPlans();
+            filterPlans('all');
+        });
+
+        // Fetch plans from the database
+        let allPlans = [];
+
+        async function fetchPlans() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/plans`, {
+                    headers: getAuthHeaders()
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch plans: ' + response.statusText);
+                }
+
+                allPlans = await response.json();
+                console.log('Fetched plans:', allPlans);
+
+                // Log unique categories for debugging
+                const uniqueCategories = [...new Set(allPlans.map(plan => plan.category?.categoryName || 'Uncategorized'))];
+                console.log('Unique categories from backend:', uniqueCategories);
+            } catch (error) {
+                console.error('Error fetching plans:', error);
+                const plansContainer = document.getElementById('plans-container');
+                plansContainer.innerHTML = '<p class="text-danger text-center">Failed to load plans. Please try again later.</p>';
+            }
+        }
+
+        // Function to normalize category from backend to frontend filter
+        function normalizeCategory(backendCategory) {
+            const category = (backendCategory || 'all').toLowerCase().trim();
+            switch (category) {
+                case 'popular':
+                case 'popular plans':
+                    return 'popular';
+                case 'data':
+                case 'data plans':
+                    return 'data';
+                case 'unlimited':
+                case 'unlimited plans':
+                case 'unlimited data':
+                case 'unlimited data plans': // Added to match "Unlimited Data Plans"
+                case 'unlimiteddata':        // Added for no-space variation
+                    return 'unlimited';
+                case '5g':
+                case '5g plans':
+                    return 'fiveg';
+                case 'annual':
+                case 'annual plans':
+                    return 'annual';
+                default:
+                    console.warn(`Unmapped category: ${category}`);
+                    return category; // Return raw category for unmatched cases
+            }
+        }
+
+        // Function to render plans
+        function renderPlans(filter = 'all') {
+            const plansContainer = document.getElementById('plans-container');
+            plansContainer.innerHTML = '';
+
+            if (!allPlans.length) {
+                plansContainer.innerHTML = '<p class="text-center">Loading plans...</p>';
+                return;
+            }
+
+            let hasPlans = false;
+
+            allPlans.forEach(plan => {
+                const backendCategory = plan.category?.categoryName;
+                const normalizedCategory = normalizeCategory(backendCategory);
+
+                console.log(`Plan: ${plan.planName}, Backend Category: ${backendCategory}, Normalized: ${normalizedCategory}, Filter: ${filter}`);
+
+                if (filter === 'all' || normalizedCategory === filter) {
+                    const planCard = document.createElement('div');
+                    planCard.className = `plan-card ${normalizedCategory}`;
+
+                    planCard.innerHTML = `
+                        <h3>₹${plan.planPrice.toFixed(2)}</h3>
+                        <p>${plan.data || 'N/A'}</p>
+                        <p>${plan.validity || 'N/A'} Validity</p>
+                        <p>${plan.benefits || 'No Benefits'}</p>
+                        <span class="badge">${plan.category?.categoryName || 'Plan'}</span>
+                        <button class="buy-btn" onclick="redirectToPayment(${plan.planPrice}, '${plan.data || 'N/A'}', '${plan.validity || 'N/A'}', '${plan.benefits || 'No Benefits'}')">Buy Now</button>
+                    `;
+
+                    plansContainer.appendChild(planCard);
+                    hasPlans = true;
+                }
+            });
+
+            if (!hasPlans) {
+                plansContainer.innerHTML = `<p class="text-center">No plans available for category: ${filter}. Check console for category mismatches.</p>`;
+            }
+        }
+
+        // Filter plans function
+        function filterPlans(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-category') === category) {
+                    btn.classList.add('active');
+                }
+            });
+
+            renderPlans(category);
+        }
+
+        // Utility function to get query parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Store plan details for mobile input flow
+        let currentPlanDetails = null;
+
+        // Redirect to payment function
+        function redirectToPayment(price, data, validity, calls) {
+            if (!price || !data || !validity || !calls) {
+                console.error("Missing plan details.");
+                return;
+            }
+
+            // Store current plan details
+            currentPlanDetails = { price, data, validity, calls };
+
+            // Check if mobile number is already available
+            const mobileNumber = getQueryParam("mobile");
+            
+            if (!mobileNumber) {
+                // Show mobile input modal if no mobile number
+                let mobileInputModal = new bootstrap.Modal(document.getElementById("mobileInputModal"));
+                mobileInputModal.show();
+                return;
+            }
+
+            // If mobile number exists, proceed with showing plan modal
+            showPlanModal(price, data, validity, calls, mobileNumber);
+        }
+
+        function showPlanModal(price, data, validity, calls, mobileNumber) {
+            document.getElementById("modal-price").textContent = `₹${price.toFixed(2)}`;
+            document.getElementById("modal-data").textContent = data;
+            document.getElementById("modal-validity").textContent = validity;
+            document.getElementById("modal-calls").textContent = calls;
+            document.getElementById("modal-total").textContent = `₹${price.toFixed(2)}`;
+
+            let payUrl = `paymentpage.html?price=${encodeURIComponent(price)}&data=${encodeURIComponent(data)}&validity=${encodeURIComponent(validity)}&calls=${encodeURIComponent(calls)}`;
+            
+            if (mobileNumber) {
+                payUrl += `&mobile=${encodeURIComponent(mobileNumber)}`;
+            }
+
+            let payButton = document.getElementById("payButton");
+            payButton.setAttribute("href", payUrl);
+            payButton.classList.remove("d-none");
+
+            let planModal = new bootstrap.Modal(document.getElementById("planModal"));
+            planModal.show();
+        }
+
+        function validateAndProceed() {
+            const mobileInput = document.getElementById("mobileNumberInput");
+            const mobileNumber = mobileInput.value.trim();
+            
+            // Validate mobile number
+            if (!/^[0-9]{10}$/.test(mobileNumber)) {
+                mobileInput.classList.add("is-invalid");
+                return;
+            }
+            
+            // Hide mobile input modal
+            bootstrap.Modal.getInstance(document.getElementById("mobileInputModal")).hide();
+            
+            // Show plan modal with collected mobile number
+            if (currentPlanDetails) {
+                showPlanModal(
+                    currentPlanDetails.price,
+                    currentPlanDetails.data,
+                    currentPlanDetails.validity,
+                    currentPlanDetails.calls,
+                    mobileNumber
+                );
+            }
+        }
+
+        // Reset mobile input validation on input
+        document.getElementById("mobileNumberInput").addEventListener("input", function() {
+            this.classList.remove("is-invalid");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepaid Recharge Admin Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="logo">
+                <i class="fas fa-mobile-alt"></i>
+                <span>SpectrumLink</span>
+            </a>
+        </div>
+        
+        <ul class="sidebar-nav nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#dashboard" data-bs-toggle="tab">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#users" data-bs-toggle="tab">
+                    <i class="fas fa-users"></i> User Management
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#plans" data-bs-toggle="tab">
+                    <i class="fas fa-tags"></i> Plan Management
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#transactions" data-bs-toggle="tab">
+                    <i class="fas fa-exchange-alt"></i> Transactions
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#reports" data-bs-toggle="tab">
+                    <i class="fas fa-chart-bar"></i> Reports & Analytics
+                </a>
+            </li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            <!-- Removed logout button from here -->
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light mb-4">
+            <div class="container-fluid">
+                <button class="sidebar-toggle btn" type="button">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar">
+                                    <span>VM</span>
+                                </div>
+                                <span class="ms-2 d-none d-lg-inline">Vinayak Mahadev</span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="adminLogout()"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Dashboard Tab -->
+            <div class="tab-pane fade show active" id="dashboard">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="mb-0">Dashboard Overview</h4>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card stat-card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <div class="stat-label">Total Users</div>
+                                        <div class="stat-value">12,845</div>
+                                        <div class="text-success"><i class="fas fa-arrow-up me-1"></i> 7.2%</div>
+                                    </div>
+                                    <div class="stat-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card stat-card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <div class="stat-label">Active Plans</div>
+                                        <div class="stat-value">9,587</div>
+                                        <div class="text-success"><i class="fas fa-arrow-up me-1"></i> 3.5%</div>
+                                    </div>
+                                    <div class="stat-icon">
+                                        <i class="fas fa-tag"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card stat-card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <div class="stat-label">Pending Recharges</div>
+                                        <div class="stat-value">48</div>
+                                        <div class="text-danger"><i class="fas fa-arrow-up me-1"></i> 12.8%</div>
+                                    </div>
+                                    <div class="stat-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card stat-card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <div class="stat-label">Monthly Revenue</div>
+                                        <div class="stat-value">₹524,250</div>
+                                        <div class="text-success"><i class="fas fa-arrow-up me-1"></i> 5.3%</div>
+                                    </div>
+                                    <div class="stat-icon">
+                                        <i class="fas fa-rupee-sign"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Expiring Plans Alert -->
+                <div class="alert alert-warning d-flex align-items-center mb-4" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <div>
+                        <strong>Attention!</strong> Some user plans are expiring in the next 3 days.
+                        <a href="#" class="alert-link" data-bs-toggle="modal" data-bs-target="#expiringPlansModal" onclick="loadExpiringPlans()">Check now</a>
+                    </div>
+                </div>
+
+                <!-- Expiring Plans Modal -->
+                <div class="modal fade" id="expiringPlansModal" tabindex="-1" aria-labelledby="expiringPlansLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="expiringPlansLabel">Plans Expiring in 3 Days</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Mobile Number</th>
+                                            <th>Plan</th>
+                                            <th>Expiry Date</th>
+                                            <th>Days Left</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="expiringPlansTable">
+                                        <tr><td colspan="5" class="text-center">Loading...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Transactions -->
+                <div class="row">
+                    <div class="col-lg-12 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span>Recent Transactions</span>
+                                <a href="#transactions" data-bs-toggle="tab" class="btn btn-sm btn-outline-primary" onclick="loadTransactions()">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>User</th>
+                                                <th>Plan</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#TRX-5642</td>
+                                                <td>Rahul Singh</td>
+                                                <td>3 Months Unlimited</td>
+                                                <td>₹699</td>
+                                                <td>Feb 26, 2025</td>
+                                                <td><span class="badge bg-success">Completed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#TRX-5641</td>
+                                                <td>Priya Sharma</td>
+                                                <td>Monthly Data Pack</td>
+                                                <td>₹249</td>
+                                                <td>Feb 26, 2025</td>
+                                                <td><span class="badge bg-success">Completed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#TRX-5640</td>
+                                                <td>Amit Kumar</td>
+                                                <td>Annual Premium</td>
+                                                <td>₹1,999</td>
+                                                <td>Feb 25, 2025</td>
+                                                <td><span class="badge bg-success">Completed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#TRX-5639</td>
+                                                <td>Sneha Patel</td>
+                                                <td>Weekly Data Pack</td>
+                                                <td>₹99</td>
+                                                <td>Feb 25, 2025</td>
+                                                <td><span class="badge bg-danger">Failed</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>#TRX-5638</td>
+                                                <td>Vijay Reddy</td>
+                                                <td>Monthly Plus Pack</td>
+                                                <td>₹349</td>
+                                                <td>Feb 25, 2025</td>
+                                                <td><span class="badge bg-success">Completed</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- User Management Tab -->
+<div class="tab-pane fade" id="users">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">User Management</h4>
+    </div>
+    
+    <!-- User Management Tabs -->
+    <ul class="nav nav-pills mb-3 dashboard-tabs" id="userManagementTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="expiring-tab" data-bs-toggle="pill" data-bs-target="#expiring" type="button" role="tab" aria-controls="expiring" aria-selected="true">Expiring Plans</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="all-users-tab" data-bs-toggle="pill" data-bs-target="#all-users" type="button" role="tab" aria-controls="all-users" aria-selected="false">All Users</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="blocked-users-tab" data-bs-toggle="pill" data-bs-target="#blocked-users" type="button" role="tab" aria-controls="blocked-users" aria-selected="false">Blocked</button>
+        </li>
+    </ul>
+    
+    <!-- Search and Filter -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" class="form-control" placeholder="Search by name, mobile, or email...">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="d-flex gap-2">
+                <select class="form-select">
+                    <option selected>Filter by Plan</option>
+                    <option>Monthly</option>
+                    <option>Quarterly</option>
+                    <option>Annual</option>
+                    <option>Custom</option>
+                </select>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-filter"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- User Management Tab Content -->
+    <div class="tab-content" id="userTabContent">
+        <!-- Expiring Plans -->
+        <div class="tab-pane fade show active" id="expiring" role="tabpanel" aria-labelledby="expiring-tab">
+            <div class="card">
+                <div class="card-header bg-warning bg-opacity-25">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-exclamation-circle me-2 text-warning"></i>
+                        <span>Users whose plan will expire in the next 3 days</span>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Mobile Number</th>
+                                    <th>Plan</th>
+                                    <th>Expiry Date</th>
+                                    <th>Days Left</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="user-profile">
+                                            <div class="avatar">RS</div>
+                                            <div>
+                                                <div class="fw-semibold">Rajesh Sharma</div>
+                                                <div class="small text-muted">rajesh.s@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>9876543210</td>
+                                    <td>Monthly Premium</td>
+                                    <td>Feb 27, 2025</td>
+                                    <td><span class="badge bg-danger">1 day</span></td>
+                                    <td>
+                                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#sendReminderModal">
+                                            <i class="fas fa-bell me-1"></i> Remind
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="user-profile">
+                                            <div class="avatar">MP</div>
+                                            <div>
+                                                <div class="fw-semibold">Meena Patel</div>
+                                                <div class="small text-muted">mpatel@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>8765432109</td>
+                                    <td>Quarterly Value Pack</td>
+                                    <td>Feb 28, 2025</td>
+                                    <td><span class="badge bg-warning">2 days</span></td>
+                                    <td>
+                                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#sendReminderModal">
+                                            <i class="fas fa-bell me-1"></i> Remind
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="user-profile">
+                                            <div class="avatar">AK</div>
+                                            <div>
+                                                <div class="fw-semibold">Arjun Kumar</div>
+                                                <div class="small text-muted">arjun.k@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>7654321098</td>
+                                    <td>Annual Basic</td>
+                                    <td>Mar 1, 2025</td>
+                                    <td><span class="badge bg-warning">3 days</span></td>
+                                    <td>
+                                        <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#sendReminderModal">
+                                            <i class="fas fa-bell me-1"></i> Remind
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- All Users Tab -->
+        <div class="tab-pane fade" id="all-users" role="tabpanel" aria-labelledby="all-users-tab">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Mobile Number</th>
+                                    <th>Joined</th>
+                                    <th>Current Plan</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="user-profile">
+                                            <div class="avatar">VS</div>
+                                            <div>
+                                                <div class="fw-semibold">Vikas Singh</div>
+                                                <div class="small text-muted">vikas.s@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>9876543211</td>
+                                    <td>Jan 15, 2025</td>
+                                    <td>Premium Annual</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Edit</a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i> View History</a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-ban me-2"></i> Block User</a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-check me-2"></i> Unblock User</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt me-2"></i> Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+           
+                                <tr>
+                                    <td>
+                                        <div class="user-profile">
+                                            <div class="avatar">NG</div>
+                                            <div>
+                                                <div class="fw-semibold">Neha Gupta</div>
+                                                <div class="small text-muted">neha.g@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>8765432108</td>
+                                    <td>Dec 12, 2024</td>
+                                    <td>Basic Monthly</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Edit</a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i> View History</a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-ban me-2"></i> Block User</a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-check me-2"></i> Unblock User</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt me-2"></i> Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="user-profile">
+                                            <div class="avatar">SR</div>
+                                            <div>
+                                                <div class="fw-semibold">Sanjay Reddy</div>
+                                                <div class="small text-muted">sanjay.r@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>7654321097</td>
+                                    <td>Feb 3, 2025</td>
+                                    <td>Quarterly Plus</td>
+                                    <td><span class="badge bg-danger">Blocked</span></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Edit</a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i> View History</a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="fas fa-check me-2"></i> Unblock User</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt me-2"></i> Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Blocked Users Tab -->
+        <div class="tab-pane fade" id="blocked-users" role="tabpanel" aria-labelledby="blocked-users-tab">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Mobile Number</th>
+                                    <th>Blocked Date</th>
+                                    <th>Reason</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="user-profile">
+                                            <div class="avatar">SR</div>
+                                            <div>
+                                                <div class="fw-semibold">Sanjay Reddy</div>
+                                                <div class="small text-muted">sanjay.r@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>7654321097</td>
+                                    <td>Feb 20, 2025</td>
+                                    <td>Payment fraud attempt</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-success">Unblock</button>
+                                        <button class="btn btn-sm btn-outline-secondary">View History</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            
+ <!-- Plan Management Tab -->
+<div class="tab-pane fade" id="plans">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">Plan Management</h4>
+        <div>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPlanModal">
+                <i class="fas fa-plus me-1"></i> Add New Plan
+            </button>
+        </div>
+    </div>
+    
+    <!-- Plan Categories Navigation -->
+    <ul class="nav nav-tabs mb-4" id="planCategoriesTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="all-plans-tab" data-bs-toggle="tab" data-bs-target="#all-plans" type="button" role="tab">All Plans</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="by-category-tab" data-bs-toggle="tab" data-bs-target="#by-category" type="button" role="tab">By Category</button>
+        </li>
+    </ul>
+    
+    <!-- Plan Categories Content -->
+    <div class="tab-content" id="planCategoriesTabContent">
+        <!-- All Plans Tab -->
+        <div class="tab-pane fade show active" id="all-plans" role="tabpanel">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="plansTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Plan Name</th>
+                                    <th>Price (₹)</th>
+                                    <th>Data</th>
+                                    <th>Validity</th>
+                                    <th>Benefits</th>
+                                    <th>Category</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Plans will be loaded dynamically -->
+                                <tr>
+                                    <td colspan="8" class="text-center py-4">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- By Category Tab -->
+        <div class="tab-pane fade" id="by-category" role="tabpanel">
+            <div class="row" id="categoryCardsContainer">
+                <!-- Category cards will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add/Edit Plan Modal (unchanged for now) -->
+<div class="modal fade" id="addPlanModal" tabindex="-1" aria-labelledby="addPlanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPlanModalLabel">Add New Plan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="planForm" class="needs-validation" novalidate>
+                    <input type="hidden" id="planId">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="planName" class="form-label">Plan Name*</label>
+                            <input type="text" class="form-control" id="planName" required>
+                            <div class="invalid-feedback">Please enter a plan name.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="planPrice" class="form-label">Price (₹)*</label>
+                            <input type="number" class="form-control" id="planPrice" step="0.01" min="0" required>
+                            <div class="invalid-feedback">Please enter a valid price.</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="data" class="form-label">Data*</label>
+                            <input type="text" class="form-control" id="data" placeholder="e.g. 1.5GB/day" required>
+                            <div class="invalid-feedback">Please specify the data amount.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validity" class="form-label">Validity*</label>
+                            <input type="text" class="form-control" id="validity" placeholder="e.g. 28 days" required>
+                            <div class="invalid-feedback">Please specify the validity period.</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="benefits" class="form-label">Benefits</label>
+                        <textarea class="form-control" id="benefits" rows="2" placeholder="Enter benefits separated by commas"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="planDetailsContent" class="form-label">Plan Details</label>
+                        <textarea class="form-control" id="planDetailsContent" rows="3" placeholder="Detailed description of the plan"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category*</label>
+                        <select class="form-select" id="category" required>
+                            <option value="">Select Category</option>
+                            <!-- Categories will be loaded dynamically -->
+                        </select>
+                        <div class="invalid-feedback">Please select a category.</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="savePlanBtn">Save Plan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal (unchanged for now) -->
+<div class="modal fade" id="deletePlanModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this plan? This action cannot be undone.</p>
+                <input type="hidden" id="deletePlanId">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+            
+            <!-- Transactions Tab -->
+            <div class="tab-pane fade" id="transactions">
+                <h4 class="mb-4">Transaction History</h4>
+                <!-- Transactions content would go here -->
+
+
+                 <!-- Transactions Table -->
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>User</th>
+                            <th>Plan</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#TRX-5642</td>
+                            <td>Rahul Singh</td>
+                            <td>3 Months Unlimited</td>
+                            <td>₹699</td>
+                            <td>Feb 26, 2025</td>
+                            <td><span class="badge bg-success">Completed</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#TRX-5641</td>
+                            <td>Priya Sharma</td>
+                            <td>Monthly Data Pack</td>
+                            <td>₹249</td>
+                            <td>Feb 26, 2025</td>
+                            <td><span class="badge bg-success">Completed</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#TRX-5640</td>
+                            <td>Amit Kumar</td>
+                            <td>Annual Premium</td>
+                            <td>₹1,999</td>
+                            <td>Feb 25, 2025</td>
+                            <td><span class="badge bg-success">Completed</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#TRX-5639</td>
+                            <td>Sneha Patel</td>
+                            <td>Weekly Data Pack</td>
+                            <td>₹99</td>
+                            <td>Feb 25, 2025</td>
+                            <td><span class="badge bg-danger">Failed</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary">View Details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+          <!-- Reports Tab -->
+<div class="tab-pane fade" id="reports">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">Reports & Analytics</h4>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#generateReportModal">
+            <i class="fas fa-download me-1"></i> Generate Report
+        </button>
+    </div>
+
+    <!-- Revenue Chart -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <span><i class="fas fa-chart-line me-2"></i> Monthly Revenue</span>
+                </div>
+                <div class="card-body">
+                    <canvas id="revenueChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <span><i class="fas fa-chart-pie me-2"></i> Plan Distribution</span>
+                </div>
+                <div class="card-body">
+                    <canvas id="planDistributionChart" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Activity Table -->
+    <div class="card">
+        <div class="card-header">
+            <span><i class="fas fa-table me-2"></i> User Activity</span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Last Login</th>
+                            <th>Plans Purchased</th>
+                            <th>Total Spent</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rahul Singh</td>
+                            <td>Feb 26, 2025</td>
+                            <td>3</td>
+                            <td>₹2,097</td>
+                            <td><span class="badge bg-success">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>Priya Sharma</td>
+                            <td>Feb 25, 2025</td>
+                            <td>2</td>
+                            <td>₹498</td>
+                            <td><span class="badge bg-success">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>Amit Kumar</td>
+                            <td>Feb 24, 2025</td>
+                            <td>1</td>
+                            <td>₹1,999</td>
+                            <td><span class="badge bg-warning">Inactive</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sneha Patel</td>
+                            <td>Feb 23, 2025</td>
+                            <td>1</td>
+                            <td>₹99</td>
+                            <td><span class="badge bg-danger">Blocked</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+            
+            <!-- Reports Tab -->
+            <div class="tab-pane fade" id="reports">
+                <h4 class="mb-4">Reports & Analytics</h4>
+                <!-- Reports content would go here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="userName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="userName" placeholder="Enter full name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="userMobile" class="form-label">Mobile Number</label>
+                            <input type="tel" class="form-control" id="userMobile" placeholder="Enter mobile number">
+                        </div>
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="userEmail" placeholder="Enter email address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="userPlan" class="form-label">Select Plan</label>
+                            <select class="form-select" id="userPlan">
+                                <option selected>Choose a plan...</option>
+                                <option>Basic Monthly - ₹249</option>
+                                <option>Premium Monthly - ₹399</option>
+                                <option>Basic Quarterly - ₹699</option>
+                                <option>Premium Annual - ₹2,999</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add User</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Send Reminder Modal -->
+    <div class="modal fade" id="sendReminderModal" tabindex="-1" aria-labelledby="sendReminderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sendReminderModalLabel">Send Renewal Reminder</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i> This will send a reminder to the user about their upcoming plan expiry.
+                    </div>
+
+                    <div class="user-info mb-3 p-3 border rounded">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="avatar me-3">MP</div>
+                            <div>
+                                <div class="fw-bold">Meena Patel</div>
+                                <div class="text-muted">mpatel@example.com</div>
+                            </div>
+                        </div>
+                        <div class="small">
+                            <div><strong>Current Plan:</strong> Quarterly Value Pack</div>
+                            <div><strong>Expiry Date:</strong> Feb 28, 2025</div>
+                            <div><strong>Mobile Number:</strong> 8765432109</div>
+                        </div>
+                    </div>
+
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Reminder Method</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="reminderSMS" checked>
+                                <label class="form-check-label" for="reminderSMS">
+                                    SMS
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="reminderEmail" checked>
+                                <label class="form-check-label" for="reminderEmail">
+                                    Email
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="reminderPush">
+                                <label class="form-check-label" for="reminderPush">
+                                    Push Notification
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="reminderMessage" class="form-label">Custom Message (Optional)</label>
+                            <textarea class="form-control" id="reminderMessage" rows="3" placeholder="Enter custom message for the reminder"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Send Reminder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Expiring Plans Modal -->
+    <div class="modal fade" id="expiringPlansModal" tabindex="-1" aria-labelledby="expiringPlansLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="expiringPlansLabel">Plans Expiring in 3 Days</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Mobile Number</th>
+                                <th>Plan</th>
+                                <th>Expiry Date</th>
+                                <th>Days Left</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expiringPlansTable">
+                            <!-- Data will be inserted here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Bootstrap and other interactions -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/admin.js"></script>
+    <script src="../js/admin-plans.js"></script>
+    <script src="../js/admin-transactions.js"></script>
+    <script>
+        function adminLogout() {
+            // Clear admin login state
+            sessionStorage.removeItem('adminLoggedIn');
+            
+            // Redirect to admin login page
+            window.location.href = 'adminlogin.html';
+        }
+
+        // Add logout button to the navbar
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutBtn = document.createElement('button');
+            logoutBtn.className = 'btn btn-outline-danger btn-sm';
+            logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt me-1"></i> Logout';
+            logoutBtn.onclick = adminLogout;
+            
+            // Add logout button to the navbar
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                navbar.appendChild(logoutBtn);
+            }
+        });
+    </script>
+</body>
+</html>

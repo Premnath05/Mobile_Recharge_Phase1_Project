@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | SpectrumLink</title>
+    <link rel="stylesheet" href="../css/loginpage.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">SpectrumLink</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="planspage.html">Plans</a></li>
+                <li><a href="contactpage.html">Contact</a></li>
+                <li><a href="loginpage.html" class="login-btn" id="loginProfileBtn">Login</a></li>
+            </ul>
+            <div class="menu-icon">☰</div>
+        </nav>
+    </header>
+
+    <section class="login-section">
+        <div class="login-box">
+            <!-- Mobile Number Form -->
+            <div id="mobile-form" class="form-container active">
+                <h2>Login</h2>
+                <p>Enter your mobile number to continue</p>
+                
+                <form id="login-form">
+                    <div class="input-group">
+                        <input type="text" id="mobile-number" placeholder="Enter Mobile Number" maxlength="10" required>
+                        <p id="mobile-error" class="error-message"></p>
+                    </div>
+                    <button type="submit" class="submit-btn">Send OTP</button>
+                </form>
+            </div>
+
+            <!-- OTP Form (Updated to 6-digit) -->
+            <div id="otp-form" class="form-container">
+                <h2>Verify OTP</h2>
+                <p>Enter the 6-digit OTP sent to your mobile number</p>
+                <p id="mobile-display" class="mobile-number-display"></p>
+                
+                <form id="otp-verification-form">
+                    <div class="otp-input-group">
+                        <input type="text" maxlength="1" class="otp-input" required>
+                        <input type="text" maxlength="1" class="otp-input" required>
+                        <input type="text" maxlength="1" class="otp-input" required>
+                        <input type="text" maxlength="1" class="otp-input" required>
+                        <input type="text" maxlength="1" class="otp-input" required>
+                        <input type="text" maxlength="1" class="otp-input" required>
+                    </div>
+                    <p id="otp-error" class="error-message"></p>
+                    <div class="timer-container">
+                        <span id="timer">01:00</span>
+                        <button type="button" id="resend-otp" class="resend-btn" disabled>Resend OTP</button>
+                    </div>
+                    <button type="submit" class="submit-btn">Verify & Login</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2025 SpectrumLink. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/login.js"></script>
+</body>
+</html>
