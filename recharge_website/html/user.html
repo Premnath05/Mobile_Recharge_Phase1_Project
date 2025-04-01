@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Mobile Recharge</title>
+
+
+    <link rel="stylesheet" href="/recharge_website/css/user.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">SpectrumLink</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="#" id="notification-link">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                            <img src="/images/user.png" alt="User" class="profile-img me-2">
+                            <span>Vinayak Mahadev</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" id="profile-dropdown"><i class="fas fa-user me-2"></i> My Profile</a></li>
+                            <!-- <li><a class="dropdown-item" href="#" id="settings-dropdown"><i class="fas fa-cog me-2"></i> Settings</a></li> -->
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logout-dropdown"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="sidebar">
+        <a href="#" class="sidebar-link" data-section="dashboard-section">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="#" class="sidebar-link" data-section="recharge-history-section">
+            <i class="fas fa-history"></i>
+            <span>Recharge History</span>
+        </a>
+        <a href="#" class="sidebar-link" data-section="payment-methods-section">
+            <i class="fas fa-credit-card"></i>
+            <span>Payment Methods</span>
+        </a>
+        <a href="#" class="sidebar-link" data-section="profile-settings-section">
+            <i class="fas fa-user-cog"></i>
+            <span>Profile & Settings</span>
+        </a>
+        <a href="#support-section" class="sidebar-link" data-section="support-section">
+            <i class="fas fa-headset"></i>
+            <span>Support</span>
+        </a>
+        <a href="index.html" class="sidebar-link" id="logout-link">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+    
+    <div class="main-content">
+      
+        <div id="dashboard-section" class="content-section active">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="mb-4">Dashboard</h3>
+                </div>
+                
+                
+                <div class="col-12 col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>Current Plan</span>
+                            <div>
+                                <!-- <button class="btn btn-primary btn-sm me-2">Renew Plan</button> -->
+                                <button class="btn btn-outline-primary btn-sm">Change Plan</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="plan-details">
+                                <div class="plan-name">Unlimited Plus</div>
+                                <div class="mb-3">
+                                    <i class="fas fa-mobile-alt me-2"></i> +91 9876543210
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-6 col-md-3">
+                                        <div class="d-flex flex-column">
+                                            <small class="text-muted">Data</small>
+                                            <span class="fw-bold">50 GB</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="d-flex flex-column">
+                                            <small class="text-muted">Voice</small>
+                                            <span class="fw-bold">Unlimited</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="d-flex flex-column">
+                                            <small class="text-muted">SMS</small>
+                                            <span class="fw-bold">Unlimited</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="d-flex flex-column">
+                                            <small class="text-muted">Validity</small>
+                                            <span class="fw-bold">28 Days</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress mt-2 mb-2" style="height: 6px;">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small>19 days left</small>
+                                    <small>Expires on March 17, 2025</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="col-12 col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">Data Usage</div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="fw-bold">32.5 GB used of 50 GB</span>
+                                <span class="badge bg-success">17.5 GB left</span>
+                            </div>
+                            <div class="progress mb-3" style="height: 10px;">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-arrow-down text-success me-2"></i>
+                                        <div>
+                                            <small class="d-block text-muted">Downloaded</small>
+                                            <span class="fw-bold">22.8 GB</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-arrow-up text-primary me-2"></i>
+                                        <div>
+                                            <small class="d-block text-muted">Uploaded</small>
+                                            <span class="fw-bold">9.7 GB</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="col-12 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>Recent Recharges</span>
+                            <a href="#" class="text-decoration-none" id="view-all-recharges">View All</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="transaction-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-bold">Unlimited Plus</div>
+                                    <div class="transaction-date">Feb 20, 2025</div>
+                                </div>
+                                <div class="transaction-amount">₹799</div>
+                            </div>
+                            <div class="transaction-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-bold">Data Booster</div>
+                                    <div class="transaction-date">Feb 05, 2025</div>
+                                </div>
+                                <div class="transaction-amount">₹499</div>
+                            </div>
+                            <div class="transaction-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-bold">Unlimited Plus</div>
+                                    <div class="transaction-date">Jan 20, 2025</div>
+                                </div>
+                                <div class="transaction-amount">₹399</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="col-12 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>Notifications</span>
+                            <a href="#" class="text-decoration-none" id="view-all-notifications">View All</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="transaction-item d-flex align-items-center">
+                                <div class="me-3">
+                                    <i class="fas fa-exclamation-circle text-warning fa-lg"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold">Your plan expires in 19 days</div>
+                                    <div class="transaction-date">Today, 10:25 AM</div>
+                                </div>
+                            </div>
+                            <div class="transaction-item d-flex align-items-center">
+                                <div class="me-3">
+                                    <i class="fas fa-gift text-danger fa-lg"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold">New offer available for you!</div>
+                                    <div class="transaction-date">Yesterday, 3:45 PM</div>
+                                </div>
+                            </div>
+                            <div class="transaction-item d-flex align-items-center">
+                                <div class="me-3">
+                                    <i class="fas fa-credit-card text-success fa-lg"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold">Recharge successful - ₹299</div>
+                                    <div class="transaction-date">Feb 20, 2025, 9:30 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notification Modal -->
+<div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notificationModalLabel">All Notifications</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="notificationModalBody">
+                <!-- Notifications will be dynamically inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+                
+                <div class="col-12 mb-4">
+                    <div class="card">
+                        <div class="card-header">Special Offers & Promotions</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <h5 class="card-title mb-0">Weekend Data Booster</h5>
+                                                <span class="offers-badge">15% OFF</span>
+                                            </div>
+                                            <p class="card-text">Get extra 5GB data valid for weekend use at discounted price.</p>
+                                            <button class="btn btn-primary">Get Offer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <h5 class="card-title mb-0">Refer a Friend</h5>
+                                                <span class="offers-badge">₹399 CREDIT</span>
+                                            </div>
+                                            <p class="card-text">Invite friends and get ₹399 credit when they sign up.</p>
+                                            <button class="btn btn-primary">Refer Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <h5 class="card-title mb-0">Premium Upgrade</h5>
+                                                <span class="offers-badge">NEW</span>
+                                            </div>
+                                            <p class="card-text">Upgrade to Premium and get unlimited high-speed data.</p>
+                                            <button class="btn btn-primary">Learn More</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div id="recharge-history-section" class="content-section">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="mb-4">Recharge History</h3>
+                </div>
+                <div class="col-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>All Transactions</span>
+                            <div>
+                                <select class="form-select form-select-sm" aria-label="Filter by">
+                                    <option selected>All transactions</option>
+                                    <option>Last 30 days</option>
+                                    <option>Last 3 months</option>
+                                    <option>Last 6 months</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Plan</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Payment Method</th>
+                                            <th>Receipt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Feb 20, 2025</td>
+                                            <td>Unlimited Plus</td>
+                                            <td>₹499</td>
+                                            <td><span class="badge bg-success">Completed</span></td>
+                                            <td>VISA ****1234</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none view-receipt" 
+                                                   data-date="Feb 20, 2025" 
+                                                   data-plan="Unlimited Plus" 
+                                                   data-amount="₹499" 
+                                                   data-status="Completed" 
+                                                   data-payment-method="VISA ****1234" 
+                                                   data-receipt="receipt_254789.pdf">
+                                                    <i class="fas fa-download"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Feb 05, 2025</td>
+                                            <td>Data Booster</td>
+                                            <td>₹999</td>
+                                            <td><span class="badge bg-success">Completed</span></td>
+                                            <td>VISA ****1234</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none view-receipt" 
+                                                   data-date="Feb 05, 2025" 
+                                                   data-plan="Data Booster" 
+                                                   data-amount="₹999" 
+                                                   data-status="Completed" 
+                                                   data-payment-method="VISA ****1234" 
+                                                   data-receipt="receipt_245981.pdf">
+                                                    <i class="fas fa-download"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jan 20, 2025</td>
+                                            <td>Unlimited Plus</td>
+                                            <td>₹699</td>
+                                            <td><span class="badge bg-success">Completed</span></td>
+                                            <td>PayPal</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none view-receipt" 
+                                                   data-date="Jan 20, 2025" 
+                                                   data-plan="Unlimited Plus" 
+                                                   data-amount="₹699" 
+                                                   data-status="Completed" 
+                                                   data-payment-method="PayPal" 
+                                                   data-receipt="receipt_123456.pdf">
+                                                    <i class="fas fa-download"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav aria-label="Transactions pagination">
+                                <ul class="pagination justify-content-center mt-4">
+                                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+             
+        
+        
+        <div id="payment-methods-section" class="content-section">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="mb-4">Payment Methods</h3>
+                </div>
+                <div class="col-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>Your Payment Methods</span>
+                            <button class="btn btn-primary btn-sm">Add New Card</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div>
+                                                    <i class="fab fa-cc-visa fa-2x me-2"></i>
+                                                    <span class="fw-bold">VISA ending in 1234</span>
+                                                </div>
+                                                <span class="badge bg-success">Default</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <small class="text-muted">Expires: 05/2027</small>
+                                                </div>
+                                                <div>
+                                                    <a href="#" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger">Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div>
+                                                    <i class="fab fa-cc-mastercard fa-2x me-2"></i>
+                                                    <span class="fw-bold">MasterCard ending in 5678</span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <small class="text-muted">Expires: 11/2026</small>
+                                                </div>
+                                                <div>
+                                                    <a href="#" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger">Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <div>
+                                                    <i class="fab fa-paypal fa-2x me-2"></i>
+                                                    <span class="fw-bold">PayPal account</span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <small class="text-muted">Vinayakmahadev@email.com</small>
+                                                </div>
+                                                <div>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger">Remove</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mb-4">
+                    <div class="card">
+                        <div class="card-header">Auto Recharge Settings</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="autoRechargeToggle">
+                                    <label class="form-check-label" for="autoRechargeToggle">Enable Auto Recharge</label>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="rechargeThreshold" class="form-label">Recharge when plan expires in</label>
+                                        <select class="form-select" id="rechargeThreshold">
+                                            <option>1 day</option>
+                                            <option>2 days</option>
+                                            <option selected>3 days</option>
+                                            <option>5 days</option>
+                                            <option>7 days</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="defaultPaymentMethod" class="form-label">Default Payment Method</label>
+                                        <select class="form-select" id="defaultPaymentMethod">
+                                            <option selected>VISA ending in 1234</option>
+                                            <option>MasterCard ending in 5678</option>
+                                            <option>PayPal account</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Add Card Modal -->
+<div class="modal fade" id="addCardModal" tabindex="-1" aria-labelledby="addCardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCardModalLabel">Add New Card</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addCardForm">
+                    <div class="mb-3">
+                        <label for="cardNumber" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="cardNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cardHolder" class="form-label">Card Holder Name</label>
+                        <input type="text" class="form-control" id="cardHolder" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="expiryDate" class="form-label">Expiry Date</label>
+                        <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cvv" class="form-label">CVV</label>
+                        <input type="text" class="form-control" id="cvv" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Add Card</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Card Modal -->
+<div class="modal fade" id="editCardModal" tabindex="-1" aria-labelledby="editCardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCardModalLabel">Edit Card</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editCardForm">
+                    <div class="mb-3">
+                        <label for="editCardNumber" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="editCardNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCardHolder" class="form-label">Card Holder Name</label>
+                        <input type="text" class="form-control" id="editCardHolder" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editExpiryDate" class="form-label">Expiry Date</label>
+                        <input type="text" class="form-control" id="editExpiryDate" placeholder="MM/YY" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Remove Card Modal -->
+<div class="modal fade" id="removeCardModal" tabindex="-1" aria-labelledby="removeCardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="removeCardModalLabel">Remove Card</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to remove this card?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmRemoveButton">Remove</button>
+            </div>
+        </div>
+    </div>
+</div>
+        
+        <div id="profile-settings-section" class="content-section">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="mb-4">Profile & Settings</h3>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">Personal Information</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3 text-center">
+                                    <img src="/images/user.png" alt="Profile Picture" class="img-thumbnail rounded-circle mb-2" style="width: 150px; height: 150px; object-fit: cover;">
+                                    <div>
+                                        <button type="button" class="btn btn-sm btn-outline-primary">Change Photo</button>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fullName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="fullName" value="Vinayak Mahadev">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="emailAddress" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="emailAddress" value="Vinayakmahadev@email.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phoneNumber" value="+91 9876543210" readonly>
+                                    <small class="text-muted">This is your registered number and cannot be changed</small>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">Account Settings</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="currentPassword" class="form-label">Current Password</label>
+                                    <input type="password" class="form-control" id="currentPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">New Password</label>
+                                    <input type="password" class="form-control" id="newPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                                    <input type="password" class="form-control" id="confirmPassword">
+                                </div>
+                                <div class="d-grid gap-2 mb-4">
+                                    <button type="submit" class="btn btn-primary">Change Password</button>
+                                </div>
+                                <hr>
+                                <h5 class="mb-3">Notification Preferences</h5>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="emailNotifications" checked>
+                                    <label class="form-check-label" for="emailNotifications">Email Notifications</label>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="smsNotifications" checked>
+                                    <label class="form-check-label" for="smsNotifications">SMS Notifications</label>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="promoNotifications" checked>
+                                    <label class="form-check-label" for="promoNotifications">Promotional Offers</label>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">Save Preferences</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div id="support-section" class="content-section">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="mb-4">Customer Support</h3>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">Contact Support</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="supportCategory" class="form-label">Select Category</label>
+                                    <select class="form-select" id="supportCategory">
+                                        <option selected>Billing Issue</option>
+                                        <option>Technical Problem</option>
+                                        <option>Plan Inquiry</option>
+                                        <option>Request Feature</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="supportSubject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="supportSubject">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="supportDescription" class="form-label">Description</label>
+                                    <textarea class="form-control" id="supportDescription" rows="5"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="supportAttachment" class="form-label">Attachment (Optional)</label>
+                                    <input class="form-control" type="file" id="supportAttachment">
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">Submit Request</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card mb-4">
+                        <div class="card-header">Support Tickets</div>
+                        <div class="card-body">
+                            <div class="transaction-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-bold">Billing Issue #254789</div>
+                                    <div class="transaction-date">Feb 18, 2025</div>
+                                </div>
+                                <span class="badge bg-warning text-dark">In Progress</span>
+                            </div>
+                            <div class="transaction-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-bold">Technical Problem #245981</div>
+                                    <div class="transaction-date">Jan 25, 2025</div>
+                                </div>
+                                <span class="badge bg-success">Resolved</span>
+                            </div>
+                            <div class="text-center mt-3">
+                                <a href="#" class="text-decoration-none">View All Tickets</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">FAQ & Help Center</div>
+                        <div class="card-body">
+                            <div class="accordion" id="faqAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            How do I check my data balance?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            You can check your data balance by logging into your QuickCharge account and viewing the dashboard. Your current data usage and remaining balance are displayed in the Data Usage section.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            How do I change my plan?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            You can change your plan by clicking on the "Change Plan" button in the Current Plan section of your dashboard. This will show you available plans that you can switch to.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            How do automatic recharges work?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            With automatic recharges enabled, your account will be automatically topped up with your current plan when it's about to expire. You can configure the timing and payment method in the Payment Methods section.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <a href="#" class="text-decoration-none">View Full Help Center</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to log out of your account?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="modal fade" id="transactionDetailsModal" tabindex="-1" aria-labelledby="transactionDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="transactionDetailsModalLabel">Transaction Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="transactionDetailsContent">
+                        <p><strong>Date:</strong> <span id="transactionDate"></span></p>
+                        <p><strong>Plan:</strong> <span id="transactionPlan"></span></p>
+                        <p><strong>Amount:</strong> <span id="transactionAmount"></span></p>
+                        <p><strong>Status:</strong> <span id="transactionStatus"></span></p>
+                        <p><strong>Payment Method:</strong> <span id="transactionPaymentMethod"></span></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="downloadReceiptButton">Download Receipt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="/recharge_website/js/user.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Payment Page - SpectrumLink</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/recharge_website/css/paymentpage.css">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="success-checkmark">
+                        <i class="fas fa-check-circle" aria-hidden="true"></i>
+                        <h4>Payment Successful!</h4>
+                        <p>Your recharge has been processed successfully.</p>
+                        <button class="btn btn-yellow mt-3" onclick="window.location.href='index.html'">
+                            Back to Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark bg-black">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">SpectrumLink</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Plan Details Box -->
+                <div class="payment-box">
+                    <h5 class="mb-4">Plan Details</h5>
+                    <div id="planDetails">
+                        <div class="row mb-2">
+                            <div class="col-6">Plan</div>
+                            <div class="col-6 text-end" id="planName">Loading...</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">Validity</div>
+                            <div class="col-6 text-end" id="planValidity">Loading...</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6"><strong>Amount</strong></div>
+                            <div class="col-6 text-end"><strong id="planAmount">₹0</strong></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment Methods Box -->
+                <div class="payment-box">
+                    <h5 class="mb-4">Select Payment Method</h5>
+                    
+                    <!-- UPI Payment -->
+                    <div class="payment-method" id="upiMethod" onclick="selectPaymentMethod('upi')">
+                        <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/40" alt="UPI" class="me-3">
+                            <div>
+                                <h6 class="mb-0">UPI Payment</h6>
+                                <small class="text-muted">Pay using UPI apps</small>
+                            </div>
+                        </div>
+                        <div id="upiDetails" class="mt-3" style="display: none;">
+                            <input type="text" class="form-control" placeholder="Enter UPI ID" id="upiId" aria-label="UPI ID">
+                            <div class="error-text" id="upiError">Please enter a valid UPI ID</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Credit/Debit Card -->
+                    <div class="payment-method" id="cardMethod" onclick="selectPaymentMethod('card')">
+                        <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/40" alt="Cards" class="me-3">
+                            <div>
+                                <h6 class="mb-0">Credit / Debit Card</h6>
+                                <small class="text-muted">All major cards accepted</small>
+                            </div>
+                        </div>
+                        <div id="cardDetails" class="mt-3" style="display: none;">
+                            <input type="text" class="form-control mb-2" placeholder="Card Number" id="cardNumber" maxlength="16" aria-label="Card Number">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" placeholder="MM/YY" id="cardExpiry" maxlength="5" aria-label="Card Expiry Date">
+                                </div>
+                                <div class="col-6">
+                                    <input type="password" class="form-control" placeholder="CVV" id="cardCvv" maxlength="3" aria-label="Card CVV">
+                                </div>
+                            </div>
+                            <div class="error-text" id="cardError">Please enter valid card details</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Net Banking -->
+                    <div class="payment-method" id="netbankingMethod" onclick="selectPaymentMethod('netbanking')">
+                        <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/40" alt="Net Banking" class="me-3">
+                            <div>
+                                <h6 class="mb-0">Net Banking</h6>
+                                <small class="text-muted">All major banks available</small>
+                            </div>
+                        </div>
+                        <div id="netbankingDetails" class="mt-3" style="display: none;">
+                            <select class="form-control" id="bankSelect" aria-label="Select Bank">
+                                <option value="">Select Bank</option>
+                                <option value="sbi">State Bank of India</option>
+                                <option value="hdfc">HDFC Bank</option>
+                                <option value="icici">ICICI Bank</option>
+                                <option value="axis">Axis Bank</option>
+                            </select>
+                            <div class="error-text" id="bankError">Please select a bank</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Payment Summary -->
+            <div class="col-lg-4">
+                <div class="payment-box">
+                    <h5 class="mb-4">Payment Summary</h5>
+                    <div class="row mb-2">
+                        <div class="col-6">Plan Amount</div>
+                        <div class="col-6 text-end" id="summaryAmount">₹0</div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-6"><strong>Total Amount</strong></div>
+                        <div class="col-6 text-end"><strong id="summaryTotal">₹0</strong></div>
+                    </div>
+                    <button class="btn btn-yellow w-100" onclick="processPayment()" id="payButton" disabled aria-label="Pay Now">
+                        Pay Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let selectedMethod = '';
+        let planDetails = {};
+
+        // Load plan details on page load
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            planDetails = {
+                price: params.get('price') || '0',
+                data: params.get('data') || '',
+                validity: params.get('validity') || '',
+                calls: params.get('calls') || ''
+            };
+
+            // Update plan details display
+            document.getElementById('planName').textContent = `${planDetails.data} + ${planDetails.calls}`;
+            document.getElementById('planValidity').textContent = planDetails.validity;
+            document.getElementById('planAmount').textContent = `₹${planDetails.price}`;
+
+            // Update payment summary
+            updatePaymentSummary();
+        };
+
+        // Update payment summary with plan price
+        function updatePaymentSummary() {
+            const amount = parseFloat(planDetails.price);
+            const total = amount;
+
+            document.getElementById('summaryAmount').textContent = `₹${amount.toFixed(2)}`;
+            document.getElementById('summaryTotal').textContent = `₹${total.toFixed(2)}`;
+        }
+
+        // Handle payment method selection
+        function selectPaymentMethod(method) {
+            selectedMethod = method;
+            
+            // Reset all payment methods
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Hide all payment details sections
+            document.getElementById('upiDetails').style.display = 'none';
+            document.getElementById('cardDetails').style.display = 'none';
+            document.getElementById('netbankingDetails').style.display = 'none';
+
+            // Select the clicked method and show its details
+            document.getElementById(`${method}Method`).classList.add('selected');
+            document.getElementById(`${method}Details`).style.display = 'block';
+            
+            // Enable pay button
+            document.getElementById('payButton').disabled = false;
+        }
+
+        // Process payment
+        function processPayment() {
+            // Validate payment details
+            let isValid = true;
+            const errors = document.querySelectorAll('.error-text');
+            errors.forEach(error => error.style.display = 'none');
+
+            if (selectedMethod === 'upi') {
+                const upiId = document.getElementById('upiId').value.trim();
+                if (!upiId.includes('@') || upiId.length < 3) {
+                    document.getElementById('upiError').style.display = 'block';
+                    isValid = false;
+                }
+            } else if (selectedMethod === 'card') {
+                const cardNumber = document.getElementById('cardNumber').value.trim();
+                const expiry = document.getElementById('cardExpiry').value.trim();
+                const cvv = document.getElementById('cardCvv').value.trim();
+
+                // Basic validation - in a real app, we would do more thorough validation
+                if (cardNumber.length !== 16 || !/^\d+$/.test(cardNumber)) {
+                    document.getElementById('cardError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (expiry.length !== 5 || !expiry.includes('/')) {
+                    document.getElementById('cardError').style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (cvv.length !== 3 || !/^\d+$/.test(cvv)) {
+                    document.getElementById('cardError').style.display = 'block';
+                    isValid = false;
+                }
+            } else if (selectedMethod === 'netbanking') {
+                const bank = document.getElementById('bankSelect').value;
+                if (!bank) {
+                    document.getElementById('bankError').style.display = 'block';
+                    isValid = false;
+                }
+            }
+
+            if (isValid) {
+                // Show loading overlay
+                document.getElementById('loadingOverlay').style.display = 'flex';
+                
+                // Simulate payment processing with a delay
+                setTimeout(() => {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                    
+                    // Show success modal
+                    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                    document.querySelector('.success-checkmark').style.display = 'block';
+                    successModal.show();
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
