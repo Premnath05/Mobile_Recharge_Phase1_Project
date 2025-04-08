@@ -1,0 +1,228 @@
+]<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | SpectrumLink</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .admin-login-section {
+            width: 100%;
+            max-width: 400px;
+            background: #000;
+            border-radius: 10px;
+            padding: 40px;
+            border: 1px solid #FFD700;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-section h1 {
+            color: #FFD700;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .logo-section p {
+            color: white;
+            font-size: 14px;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #000;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: white;
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
+            color: #FFD700;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 480px) {
+            .admin-login-section {
+                padding: 30px 20px;
+            }
+            
+            .logo-section h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="admin-login-section">
+        <div class="logo-section">
+            <h1>SpectrumLink</h1>
+            <p>Admin Control Panel</p>
+        </div>
+        <form id="admin-login-form">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter admin username" required>
+                <p id="username-error" class="error-message"></p>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter admin password" required>
+                <p id="password-error" class="error-message"></p>
+            </div>
+            <button type="submit" class="submit-btn">Login to Dashboard</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 SpectrumLink. All rights reserved.</p>
+    </footer>
+
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("admin-login-form");
+    const usernameError = document.getElementById("username-error");
+    const passwordError = document.getElementById("password-error");
+
+    loginForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        // Reset error messages
+        usernameError.style.display = "none";
+        passwordError.style.display = "none";
+
+        if (!username) {
+            usernameError.textContent = "Username is required";
+            usernameError.style.display = "block";
+            return;
+        }
+
+        if (!password) {
+            passwordError.textContent = "Password is required";
+            passwordError.style.display = "block";
+            return;
+        }
+
+        try {
+            const formData = new URLSearchParams();
+            formData.append("username", username);
+            formData.append("password", password);
+
+            const response = await fetch("http://localhost:8083/admin/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const token = data.token; // Assuming the backend returns a JWT token
+
+                // Store the token in localStorage
+                localStorage.setItem("token", token);
+
+                // Redirect to the dashboard page
+                window.location.href = "admin.html";
+            } else {
+                const errorText = await response.text();
+                passwordError.textContent = errorText || "Invalid username or password";
+                passwordError.style.display = "block";
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            passwordError.textContent = "An error occurred. Please try again later.";
+            passwordError.style.display = "block";
+        }
+    });
+});
+
+    </script>
+</body>
+</html>
